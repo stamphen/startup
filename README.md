@@ -8,6 +8,7 @@
 
 ### Webpage Design
 [Description of event.pdf](https://github.com/stamphen/startup/files/13973098/Desuiption.of.event.pdf)
+![Application Drawing](https://github.com/stamphen/startup/assets/156570548/24789051-8b40-4c53-ae4a-9e0fb66abc76)
 
 ### Key Features:
 - Secure login over HTTPS
