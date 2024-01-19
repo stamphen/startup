@@ -10,3 +10,28 @@
 - `git status` (checks how everything is going, and gives you info)
 - `git checkout` [branch] (lets you work on different branches -- this has been really confusing to me, and I need to work on it)
     
+## HTML Notes/>
+- Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
+- Sync Javascript file with `<script src="java.js"></script>`
+(both only need to be in the `<head>` section, and you can change the file names)
+- An important thing I learned is that really the purpose of different html tags is to communicate the purpose of the paragraph/title/etc. The font, size, layout, and more can be changed with CSS. So use `<h1>` if I'm writing an important heading, even if I want it to be a smaller font than `<h1>` defaults to. 
+- Use the class and id attributes a lot, because they let me refer to specific sections with CSS or Javascript. 
+
+## CSS Notes;
+- When specifying the width of a container, padding, margins, etc., you can use percentages. This could be really useful when displaying on different screen sizes. 
+- The parameters `max-width` and `max-height` can also be very useful with screen sizes. I'll probably use a fixed width/height, with a percentage max-width/max-height.
+- When specifying margins, padding, borders the order is top, right, bottom, left. 
+- Use the `float:right;` parameter (and left) to place object next to each other. Use `clear:both;` on the next item down so it won't float. 
+- `text-transform` is very useful. You can use `:capitalize;`, `:uppercase;`, and `:lowercase;`, as well as some others. 
+- Another cool thing I learned is `cursor: pointer;`. You could use this on a button, so the cursor changes when you hover over it. 
+- You can change styles for an element with a specific class by typing `h2.top_left`, or change the styles of all tags with the same class by typing `*top_right`. You can change every element on the page by using `*`. 
+
+## Javascript Notes{}
+- Very useful to use the `onclick` attribute of a button to run a Javascript function. 
+- Use `document.getElementById('chaser').innerHTML = 'new heading'` to change what the heading used to say. This could trigger off a pushed button. 
+- Arrays are like Python lists. Can use `.length` for array length, `.push('new info')` to add something to the array, and more. 
+- Javascript objects are like Python dictionaries. Arrays can contain objects. `let array-1 = [{'name':'John', 'age':'15'}, {'name':'George', 'age':'24'}]`
+- Use `let` `const` and `var` to define variables.
+- ``console.log('important info here')`` can be a very useful command for storing and accessing information like what the user input, or how the webpage is running. Use ctrl+shift+j to access the console on Chrome. 
+- For and If loops are of the format ```if (condition) {do this} // for (define variable; condition; increment variable) {do this}```
+- Define functions by typing `function function_name(parameters) {function code}`
