@@ -1,22 +1,17 @@
+window.onload = check;
 let credentials = [{'name':'john', 'password':54321},{'name':'adam', 'password':12345}]
-let current_credentials = []
-var signed_in = false
-
 
 function buttonpush() {
     document.getElementById('buttn').innerHTML = 'wrong choice';
-    document.getElementById('header_name').innerHTML = localStorage.getItem('name')
 }
 
 function check() {
     document.getElementById('header_name').innerHTML = localStorage.getItem('name')
 }
-window.onload = check;
 
 function login() {
     const nam = document.getElementById('username').value
     const pswrd = document.getElementById('password').value
-
     for (let i = 0; i < credentials.length; i+=1) {
         if (credentials[i].name == nam && credentials[i].password == pswrd) {
             console.log(`Welcome back, ${nam}!`)
