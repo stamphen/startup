@@ -37,3 +37,21 @@ h3 {
                     so this will be below*/
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label, input {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 4px;
+    border: none;
+    background-color: #9dc1e7;
+    color: #4d1515;
+    cursor: pointer;
+    border-radius: 3px;
+}
