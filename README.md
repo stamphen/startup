@@ -7,7 +7,6 @@
 ```Journaling has always been hard for me, mostly because it takes so much time. Plus I doubt anyone else is every going to read what I write. What if I could solve both of those problems at once? I want to create a website where families or friends can journal together. There will be different pages for different events (say a family vacation) where people can add stories and memories. Since everyone is sharing, you don't have to write very much, and it's super easy to share with others! Both of the problems solved!```
 
 ### Webpage Design
-[Description of event.pdf](https://github.com/stamphen/startup/files/13973098/Desuiption.of.event.pdf)
 ![Application Drawing](https://github.com/stamphen/startup/assets/156570548/24789051-8b40-4c53-ae4a-9e0fb66abc76)
 
 ### Key Features:
