@@ -5,13 +5,13 @@ var signed_in = false
 
 function buttonpush() {
     document.getElementById('buttn').innerHTML = 'wrong choice';
-    if (current_credentials) {
-        document.getElementById('header_name').innerHTML = current_credentials.name
-    } else {
-        document.getElementById('header_name').innerHTML = 'signed-out'
-    }
-    
+    document.getElementById('header_name').innerHTML = localStorage.getItem('name')
 }
+
+function check() {
+    document.getElementById('header_name').innerHTML = localStorage.getItem('name')
+}
+window.onload = check;
 
 function login() {
     const nam = document.getElementById('username').value
@@ -21,10 +21,7 @@ function login() {
         if (credentials[i].name == nam && credentials[i].password == pswrd) {
             console.log(`Welcome back, ${nam}!`)
             console.log(credentials[i])
-            console.log(current_credentials)
-            current_credentials = credentials[i]
-            console.log(current_credentials)
-            document.getElementById('header_name').innerHTML = nam
+            localStorage.setItem('name', credentials[i].name)
             return
         }
     }
