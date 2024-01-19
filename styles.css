@@ -1,0 +1,39 @@
+body {
+    background-color: aquamarine;
+    color: brown;
+}
+
+h1 {
+    background-color: white;
+    border: 2px dashed blue;
+    border-radius: 3px;
+    margin: 4px 8px;
+    padding: 2px;
+    height: auto;
+    width: 180px;
+    max-width: 40%;
+    text-align: center;
+    font-size: 26px;
+    float: left;
+    text-transform: uppercase;
+    word-spacing: 3px;
+}
+
+h2 {
+    background-color: yellow;
+    color: black;
+    border: 1px solid black;
+    border-radius: 0.5px;
+    margin: 3px;
+    padding: 1px;
+    width: 225px;
+    max-width: 40%;
+    text-align: center;
+    float: right;
+}
+
+h3 {
+    clear: both; /* this clears the float,
+                    so this will be below*/
+}
+
