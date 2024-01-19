@@ -38,20 +38,46 @@ h3 {
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    /*display: flex;
+    flex-direction: column;*/
     align-items: center;
 }
-
-label, input {
+label {
+    float: left;
+    border: none;
+    margin: 0px 3px;
+}
+input {
     margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.pswd {
+    margin-left: 3.4px;
 }
 
 button {
+    clear: both;
     padding: 4px;
     border: none;
     background-color: #9dc1e7;
     color: #4d1515;
     cursor: pointer;
     border-radius: 3px;
+}
+button.submt {
+    margin-left: 205px;
+}
+
+br {
+    clear: both;
+}
+br.space {
+    clear: both;
+    height: 15px;
+}
+hr {
+    clear: both;
+    height: 2px;
+    background-color: #9dc1e7;
 }
