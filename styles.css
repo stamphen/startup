@@ -1,5 +1,5 @@
 body {
-    background-color: aquamarine;
+    background-color: orange;
     color: brown;
 }
 
@@ -10,7 +10,7 @@ h1 {
     margin: 4px 8px;
     padding: 2px;
     height: auto;
-    width: 180px;
+    width: 350px;
     max-width: 40%;
     text-align: center;
     font-size: 26px;
@@ -26,7 +26,7 @@ h2 {
     border-radius: 0.5px;
     margin: 3px;
     padding: 1px;
-    width: 225px;
+    width: 400px;
     max-width: 40%;
     text-align: center;
     float: right;
@@ -35,7 +35,8 @@ h2 {
 h3 {
     clear: both; /* this clears the float,
                     so this will be below*/
-}
+    font-size: 40px;
+                }
 
 form {
     /*display: flex;
