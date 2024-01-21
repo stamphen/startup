@@ -1,3 +1,4 @@
+# notes
 ## List of helpful Git functions:
 - `git init` (create git repository in the directory you're in)
 - `git clone` url (copy url from github, creates a repository in the directory that is linked to the one on github)
@@ -10,7 +11,7 @@
 - `git checkout` [branch] (lets you work on different branches -- this has been really confusing to me, and I need to work on it)
 
 
-### EC2 Web Server
+## EC2 Web Server
 Public (elastic) IP address: *http://54.81.112.52/*<br>
 To enter the server from PowerShell, run `ssh -i [key pair file] ubuntu@[ip address]` (key pair is essentially a password to let me access the server, and it is stored in a file.)
 - Started an instance with AWS (Amazon Web Services) and its service EC2, which is where I got the elastic IP. I should eventually be able to store the code I write on the server. 
