@@ -1,15 +1,24 @@
-## From GitHub intro assignment
-### List of helpful Git functions:
+## List of helpful Git functions:
 - `git init` (create git repository in the directory you're in)
 - `git clone` url (copy url from github, creates a repository in the directory that is linked to the one on github)
-- `git pull` (pulls changes from github, can us git fetch to link github without changing anything)
+- `git pull` (pulls changes from github, can us `git fetch` to link github without changing anything)
 + `git push` (pushes local changes up to the github repository)
 - `git add` (stages a change, ready to be committed)
 - `git add .` (stages all changes)
 - `git commit` ([-m] to write a message [-am] to write message and not have to stage changes)
 - `git status` (checks how everything is going, and gives you info)
 - `git checkout` [branch] (lets you work on different branches -- this has been really confusing to me, and I need to work on it)
-    
+
+
+### EC2 Web Server
+Public (elastic) IP address: *http://54.81.112.52/*
+To enter the server from PowerShell, run `ssh -i [key pair file] ubuntu@[ip address]` (key pair is essentially a password to let me access the server, and it is stored in a file.)
+- Started an instance with AWS (Amazon Web Services) and its service EC2, which is where I got the elastic IP. I should eventually be able to store the code I write on the server. 
+- I purchased a domain name for my web page (familyjournal.click) on AWS's service Route 53. Currently working on connecting it with the IP I have. Then it should be able to be used to access the webpage.
+I also wanted to include a graphic from the class notes that illustrated how the different parts of the web work together in what is called a 'Technology Stack.' I need to become more familiar with how this all works. 
+![260 tech stack](essentialsTechStack260.jpg)
+
+
 ## HTML Notes/>
 - Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
 - Sync Javascript file with `<script src="java.js"></script>`
