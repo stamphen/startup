@@ -1,4 +1,4 @@
-# notes
+# <center>notes</center>
 ## List of helpful Git functions:
 - `git init` (create git repository in the directory you're in)
 - `git clone` url (copy url from github, creates a repository in the directory that is linked to the one on github)
@@ -17,7 +17,7 @@ To enter the server from PowerShell, run `ssh -i [key pair file] ubuntu@[ip addr
 - Started an instance with AWS (Amazon Web Services) and its service EC2, which is where I got the elastic IP. I should eventually be able to store the code I write on the server. 
 - I purchased a domain name for my web page (familyjournal.click) on AWS's service Route 53. Currently working on connecting it with the IP I have. Then it should be able to be used to access the webpage.
 I also wanted to include a graphic from the class notes that illustrated how the different parts of the web work together in what is called a 'Technology Stack.' I need to become more familiar with how this all works. 
->![tech_stack](https://github.com/stamphen/startup/assets/156570548/defc73e8-378c-4608-9ef5-73689f1ad19f)
+![tech_stack](https://github.com/stamphen/startup/assets/156570548/defc73e8-378c-4608-9ef5-73689f1ad19f)
 
 
 ## HTML Notes/>
