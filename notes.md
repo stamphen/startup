@@ -75,6 +75,9 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 (both only need to be in the `<head>` section, and you can change the file names)
 - An important thing I learned is that really the purpose of different html tags is to communicate the purpose of the paragraph/title/etc. The font, size, layout, and more can be changed with CSS. So use `<h1>` if I'm writing an important heading, even if I want it to be a smaller font than `<h1>` defaults to. 
 - Use the class and id attributes a lot, because they let me refer to specific sections with CSS or Javascript. 
+- To get a link to a file (audio, video, etc.), I can upload it to my GitHub repository, go to the file, copy the permalink, and then add `?raw=true` to the end. 
+- `<body>` is divided into three sections: `<header>` `<main>`, and `<footer>`. Within these sections we can have smaller `<section>` groups or use `<nav>` to go to different places. Within sections we can use smaller blocks `<div>` to organize the webpage. Also use `<aside>` for comments that do not match the flow of information. 
+- Use `<form>` for all user input. It's very helpful to organize the webpage into what is happening where. 
 
 ## CSS Notes;
 - When specifying the width of a container, padding, margins, etc., you can use percentages. This could be really useful when displaying on different screen sizes. 
