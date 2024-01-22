@@ -1,4 +1,6 @@
 # notes
+***Startup Application URL:*** <url>https://familyjournal.click</url>
+
 ## List of helpful Git functions:
 - `git init` (create git repository in the directory you're in)
 - `git clone` url (copy url from github, creates a repository in the directory that is linked to the one on github)
