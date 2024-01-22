@@ -12,7 +12,6 @@
 - `git status` (checks how everything is going, and gives you info)
 - `git checkout` [branch] (lets you work on different branches -- this has been really confusing to me, and I need to work on it)
 
-
 ## EC2/Route 53
 Public (elastic) IP address: *http://54.81.112.52/*<br>
 To enter the server from PowerShell, run `ssh -i [key pair file] ubuntu@[ip address]` (key pair is essentially a password to let me access the server, and it is stored in a file.)
@@ -20,7 +19,6 @@ To enter the server from PowerShell, run `ssh -i [key pair file] ubuntu@[ip addr
 - I registered a domain name for my web page (familyjournal.click) on AWS's service Route 53. Then I created a record to map the domain name to my public IP address. It works with familyjournal.click and *.familyjournal.click (anything before the familyjournal still works.)<br><p>
 I also wanted to include a graphic from the class notes that illustrated how the different parts of the web work together in what is called a 'Technology Stack.' I need to become more familiar with how this all works. </p>
 ![tech_stack](https://github.com/stamphen/startup/assets/156570548/defc73e8-378c-4608-9ef5-73689f1ad19f)
-
 
 ## Caddy and web certificates
 -  Caddy is like an intermediary between the user and the website. When a user tries to access your site, Caddy is what provides the files I've created (html, css, javascript) and shows them to the user. 
@@ -34,7 +32,6 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - I then had to restart the Caddy file by entering `sudo service caddy restart`. I am quite unfamiliar with all of these commands and web programming jargon, but I know that `sudo` essentially tells the console that you are operating as an administrator. 
 - HTTP stands for HyperText Transport Protocol. 
 - HTTPS stands for Secure HyperText Transport Protocol. 
-
 
 ## Console
 - `CTRL-C` - kills the currently running command. (this could be super useful if a command is taking a really long time or I changed my mind about something)
@@ -68,6 +65,8 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - `>` - Redirect output to a file. If there is no such file, it creates it. If there is a file, it replaces whatever was there before with the new data.
 - `>>` - Redirects output to a file, but does not overwrite the file, but adds to it. 
 
+## Uploading files to my webpage:
+- I just uploaded the HTML for the simon application to <url>simon.family.journal.click</url>. I did this by running `./deployFiles.sh -k [key pair file] -h familyjournal.click -s simon`. The deployFiles.sh file essentially tells the console what to do. It deletes any previous simon files, then creates a new directory and copies all of the simon files. I also copied the deployFiles.sh file to my startup repository, so I can use it when I start uploading my own files. 
 
 ## HTML Notes/>
 - Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
