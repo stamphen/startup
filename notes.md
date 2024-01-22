@@ -1,5 +1,5 @@
 # notes
-***Startup Application URL:*** <url>https://familyjournal.click</url>
+***Startup Application URL*** <url>https://familyjournal.click</url>
 
 ## List of helpful Git functions:
 - `git init` (create git repository in the directory you're in)
