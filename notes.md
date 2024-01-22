@@ -24,7 +24,8 @@ I also wanted to include a graphic from the class notes that illustrated how the
 -  Caddy is like an intermediary between the user and the website. When a user tries to access your site, Caddy is what provides the files I've created (html, css, javascript) and shows them to the user. 
 - Web certificates make sure that connections are secure. Without a secure connection, someone else could pick up all of the data transmitted in either direction. A web certificate certifies that the connection is secure. Caddy does this automatically, but I did need to change one of the caddy files to add in my domain name.
 - Console command to 'shell into' my server: `ssh -i [key pair file] ubuntu@familyjournal.click`. I then entered 
-```➜  cd ~
+```
+➜  cd ~
 ➜  vi Caddyfile
 ```
 to edit the file. I changed the :80 and [yourdomainnamehere] portions to my domain name, then entered `:wq` in the bottom to save the file. 
