@@ -20,6 +20,52 @@ I also wanted to include a graphic from the class notes that illustrated how the
 ![tech_stack](https://github.com/stamphen/startup/assets/156570548/defc73e8-378c-4608-9ef5-73689f1ad19f)
 
 
+## Caddy and web certificates
+-  Caddy is like an intermediary between the user and the website. When a user tries to access your site, Caddy is what provides the files I've created (html, css, javascript) and shows them to the user. 
+- Web certificates make sure that connections are secure. Without a secure connection, someone else could pick up all of the data transmitted in either direction. A web certificate certifies that the connection is secure. Caddy does this automatically, but I did need to change one of the caddy files to add in my domain name.
+- Console command to 'shell into' my server: `ssh -i [key pair file] ubuntu@familyjournal.click`. I then entered 
+```➜  cd ~
+➜  vi Caddyfile
+```
+to edit the file. I changed the :80 and [yourdomainnamehere] portions to my domain name, then entered `:wq` in the bottom to save the file. 
+- I then had to restart the Caddy file by entering `sudo service caddy restart`. I am quite unfamiliar with all of these commands and web programming jargon, but I know that `sudo` essentially tells the console that you are operating as an administrator. 
+- HTTP stands for HyperText Transport Protocol. 
+- HTTPS stands for Secure HyperText Transport Protocol. 
+
+
+## Console
+- `CTRL-C` - kills the currently running command. (this could be super useful if a command is taking a really long time or I changed my mind about something)
+### Commands:
+- `sudo` - tells the console I'm an administrator
+- `pwd` (**p**resent **w**orking **d**irectory) - tells me where I am right now, the full file path
+- `ls` - will list all the files in the current directory (will list all files-even hidden ones-in a long format is you type `ls -la`)
+- `echo` - outputs the parameters of the command. So `echo hello` should output `hello`
+- `cd` - change directory. (I already know this one, can use `cd ..` to move up a directory)
+- `mkdir` - make a directory
+- `rmdir` - remove directory
+- `rm` - remove file(s)
+- `mv` - move file(s)
+- `cp` - copy file(s)
+- `ls` - list files
+- `find` - find files
+- `top` - view currently running processes with CPU and memory usage. (this sounds like it could be useful)
+- `cat` - output the contents of a file. (so if a text file says 'byu programming' you could type `cat text.txt` and it would output `byu programming`)
+- `wc` - count words in a file
+- `ps` - view currently running processes
+- `kill` - kill a currently running process
+- `sudo` - execute a command as an administrator
+- `ssh` - create a secure shell on a remote computer
+- `history` - show the history of commands
+- `ping` - Check is a website is up
+- `tracert` - Trace connections to a website
+- `dig` - show DNS info for a domain
+- `man` - look up a command in the manual
+### Special Characters:
+- `|` - Links the output of command on left to input of command on right
+- `>` - Redirect output to a file. If there is no such file, it creates it. If there is a file, it replaces whatever was there before with the new data.
+- `>>` - Redirects output to a file, but does not overwrite the file, but adds to it. 
+
+
 ## HTML Notes/>
 - Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
 - Sync Javascript file with `<script src="java.js"></script>`
