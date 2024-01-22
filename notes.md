@@ -66,7 +66,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - `>>` - Redirects output to a file, but does not overwrite the file, but adds to it. 
 
 ## Uploading files to my webpage:
-- I just uploaded the HTML for the simon application to <url>https://simon.family.journal.click</url>. I did this by running `./deployFiles.sh -k [key pair file] -h familyjournal.click -s simon`. The deployFiles.sh file essentially tells the console what to do. It deletes any previous simon files, then creates a new directory and copies all of the simon files. I also copied the deployFiles.sh file to my startup repository, so I can use it when I start uploading my own files. 
+- I just uploaded the HTML for the simon application to <url>https://simon.familyjournal.click</url>. I did this by running `./deployFiles.sh -k [key pair file] -h familyjournal.click -s simon`. The deployFiles.sh file essentially tells the console what to do. It deletes any previous simon files, then creates a new directory and copies all of the simon files. I also copied the deployFiles.sh file to my startup repository, so I can use it when I start uploading my own files. 
 
 ## HTML Notes/>
 - Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
