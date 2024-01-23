@@ -21,7 +21,31 @@
         </header>
 
         <main>
-            
+            <form method="get" action="main.html">
+                <label for="event_name">Event Name:</label>
+                <input required type="text" id="event_name" />
+                <br />
+                <label for="event_pic">Event Picture:</label>
+                <input required type="file" id="event_pic" />
+                <br />
+                <label for="event_dates">Dates:</label>
+                <input required type="date" id="event_dates1" />
+                -
+                <input required type="date" id="event_dates2" />
+                <br />
+                <label for="members">Members: (type someone's username and click add person. Repeat until all desired members have been added)</label>
+                <br />
+                <input required type="text" id="members" />
+                <button type="button">Add Person</button>
+                <ul>
+                    <li>Thomas</li>
+                    <li>Kenzie</li>
+                </ul>
+                <button type="submit">Create New Event</button>
+            </form>
+
+
+            <hr />
         </main>
 
         <footer>
