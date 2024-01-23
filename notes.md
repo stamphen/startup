@@ -67,6 +67,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 
 ## Uploading files to my webpage:
 - I just uploaded the HTML for the simon application to <url>https://simon.familyjournal.click</url>. I did this by running `./deployFiles.sh -k [key pair file] -h familyjournal.click -s simon`. The deployFiles.sh file essentially tells the console what to do. It deletes any previous simon files, then creates a new directory and copies all of the simon files. I also copied the deployFiles.sh file to my startup repository, so I can use it when I start uploading my own files. 
+- I was able to also upload my startup repository using essentially the same command: `./deployFiles.sh -k [key pair file] -h familyjournal.click -s startup`.  
 
 ## HTML Notes/>
 - Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
@@ -77,6 +78,16 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - To get a link to a file (audio, video, etc.), I can upload it to my GitHub repository, go to the file, copy the permalink, and then add `?raw=true` to the end. 
 - `<body>` is divided into three sections: `<header>` `<main>`, and `<footer>`. Within these sections we can have smaller `<section>` groups or use `<nav>` to go to different places. Within sections we can use smaller blocks `<div>` to organize the webpage. Also use `<aside>` for comments that do not match the flow of information. 
 - Use `<form>` for all user input. It's very helpful to organize the webpage into what is happening where. 
+
+## HTML Deliverable:
+- This is super exciting!! I have mostly finished the HTML pages for my HTML deliverable.
+- I will have five HTML pages, four of which will be in the navigation bar. These are index.html (login), main.html (where each event and its comments are displayed), pics.html (where you can upload pictures to the event), events.html (where you can see, change between, and add events), and event_create.html (not visible, is the page where you actually create the events.) 
+- I will use javascript for the login/creating account, and for creating new events, making comments, etc.
+- I'm going to need to store users credentials (will need to check whether their credentials are stored, or if they're creating an account, will need to check that the same name is not already being used)
+- Will need to store the name, pic, dates, and members of each event, as well as all of the comments made, who made each comment, and in what order.
+- Will need to store the list of events that each person has access to, so they can always access their events and no one else's.
+- I need to store the person's name (username) so that I can automatically add it to each of their comments and image uploads. 
+- Everytime someone submits a comment or uploads an image or creates a new event, the comment and picture lists will update. 
 
 ## CSS Notes;
 - When specifying the width of a container, padding, margins, etc., you can use percentages. This could be really useful when displaying on different screen sizes. 
