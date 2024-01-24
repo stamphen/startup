@@ -10,6 +10,7 @@
     <body>
         <header>
             <h1>The Family Journal</h1>
+            <span></span>
             <nav>
                 <menu>
                     <li><a href="index.html">Login</a></li>
@@ -23,15 +24,17 @@
         </header>
 
         <main>
-            <section class="event">
-                <h2>Florida Family Vacation!</h2>
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Ffamily-beach-vacation-back-view-happy-tropical-34560379.jpg&f=1&nofb=1&ipt=6f01c3a9cd9a58dfb13f08c756d2118bbdb9086b5c0786e8e25bd71f85ff6e7e&ipo=images" width="300px" />
-                <h4>Date: July 14<sup>th</sup>-19<sup>th</sup>, 2017</h4>
-                <h4><a href="pics.html">Pictures</a></h4>
+            <section id="event">
+                <img id="main_pic" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Ffamily-beach-vacation-back-view-happy-tropical-34560379.jpg&f=1&nofb=1&ipt=6f01c3a9cd9a58dfb13f08c756d2118bbdb9086b5c0786e8e25bd71f85ff6e7e&ipo=images" />
+                <div id="info">
+                    <h2>Florida Family Vacation!</h2>
+                    <h4>Date: July 14<sup>th</sup>-19<sup>th</sup>, 2017</h4>
+                    <a href="pics.html">Pictures</a>
+                </div>
             </section>
-            <hr />
-            <section class="comments">
-                <div class="comments_old">
+            <section id="comments">
+                <hr />
+                <div id="comments_old">
                     <p>
                         One of my favorite parts about the vacation was the steak house we visiting our last night there. Do you guys remember that? Best steak I've had in my life, for sure! I also really loved taking a nap on the sand in the middle of the day. 
                         <br />
@@ -46,7 +49,7 @@
                     </p>
                     <hr />
                 </div>
-                <div class="comments_input">
+                <div id="comments_input">
                     <form method="get" action="main.html">
                         <label for="comment">Reply:</label>
                         <textarea placeholder="Your Comment Here"></textarea>

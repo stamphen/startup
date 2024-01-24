@@ -1,6 +1,11 @@
 @font-face {
-    font-family: Bentham;
-    src: url('fonts/Bentham-Regular.ttf')
+    font-family: 'Bentham';
+    src: url('/fonts/Bentham-Regular.ttf')
+}
+
+* {
+    padding: 0;
+    margin: 0;
 }
 
 html {
@@ -10,21 +15,22 @@ html {
 body {
     background-color: #877e7e;
     color: #4d1515;
-    font-family: Bentham, serif;
+    font-family: 'Bentham', sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
+    width: 100vw;
     margin: 0;
 }
 
 header, footer, main {
-    padding: 1em;
+    padding: .3em 1em;
     border-radius: .6em;
     margin: .13em .3em;
 }
 
 header, footer {
-    flex: 0 50px;
+    flex: 0 auto;
     display: flex;
     align-items: center;
     background-color: #9dc1e7;
@@ -37,6 +43,7 @@ header {
 
 li:hover {
     background-color: rgb(215, 214, 214);
+    border-radius: .2em;
 }
 
 footer {
@@ -45,14 +52,17 @@ footer {
 }
 
 header > h1 {
-    flex: 0 150px;
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
+    flex: 0 auto;
     font-size: 30px;
-    padding-right: 4px;
-    border-right: 4px solid #4d1515;
+    text-align: center;
+    padding-right: .6em;
+}
+
+header > span {
+    width: 5px;
+    height: 30px;
+    border-radius: .2em;
+    background-color: #4d1515;
 }
 
 header > nav {
@@ -65,11 +75,12 @@ header > nav > menu {
     list-style-type: none;
     align-items: center;
     justify-content: start;
+    padding-left: 1em;
 }
 
 li {
-    flex: 0 50px;
-    padding:  0 7px;
+    flex: 0 auto;
+    padding:  0 .5em;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -81,13 +92,65 @@ li > a {
     color: #4d1515;
 }
 
-
 main {
     flex: 1;
     background-color: #eae7e7
 }
 
+section#event {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1em;
+}
 
+@media only screen and (max-width: 600px) {
+    section#event {
+        flex-direction: column;
+    }
+}
+
+#main_pic {
+    flex: 0;
+    width: 300px;
+    border: 4px solid #4d1515;
+}
+
+#info {
+    margin-left: 1em;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#info > h2 {
+    font-size: 38px;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+#info > h4 {
+    font-size: 20px;
+    text-align: center;
+}
+
+#info > a {
+    font-size: 19px;
+    color: #4d1515;
+    
+    font-weight: bolder;
+}
+
+#comments {
+    clear: both;
+}
+
+#comments_old {
+    width: 700px;
+    max-width: 100%;
+}
 
 
 
