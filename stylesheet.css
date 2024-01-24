@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Bentham;
+    src: url('fonts/Bentham-Regular.ttf')
+}
+
 html {
     box-sizing: border-box;
 }
@@ -5,11 +10,60 @@ html {
 body {
     background-color: #eae7e7;
     color: #4d1515;
-    font-family: Bentham serif;
+    font-family: Bentham, serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header, footer {
+    flex: 0 50px;
+    display: flex;
+    align-items: center;
+}
+
+header {
+    flex-direction: row;
+    justify-content: start;
+}
+
+footer {
+    flex-direction: column;
+    justify-content: center;
+}
+
+header > h1 {
+    flex: 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    font-size: 30px;
+    padding-right: 4px;
+    border-right: 4px solid #4d1515;
+}
+
+header > nav {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+header > nav > menu {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+li {
+    padding-right: 7px;
 }
 
 
-
+main {
+    flex: 1;
+}
 
 
 
