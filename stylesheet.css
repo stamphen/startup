@@ -8,7 +8,7 @@ html {
 }
 
 body {
-    background-color: #dbc5c5;
+    background-color: #877e7e;
     color: #4d1515;
     font-family: Bentham, serif;
     display: flex;
@@ -20,14 +20,14 @@ body {
 header, footer, main {
     padding: 1em;
     border-radius: .6em;
-    margin: .2em .5em;
+    margin: .13em .3em;
 }
 
 header, footer {
     flex: 0 50px;
     display: flex;
     align-items: center;
-    background-color: #877e7e;
+    background-color: #9dc1e7;
 }
 
 header {
@@ -78,7 +78,7 @@ li {
 
 li > a {
     text-decoration: none;
-    color: white;
+    color: #4d1515;
 }
 
 
