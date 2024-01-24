@@ -152,8 +152,14 @@ section#event {
     max-width: 100%;
 }
 
-#comments_old > div, #comments_input {
+#comments_old > div {
     padding: 1em 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0em;
 }
 
 form > div {
@@ -162,6 +168,15 @@ form > div {
     align-items: center;
     justify-content: start;
 }
+
+label {
+    padding-right: .5em;
+}
+
+input:not([id='event_dates1']) {
+    margin-right: .5em;
+}
+
 
 
 
