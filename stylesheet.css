@@ -1,0 +1,27 @@
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #eae7e7;
+    color: #4d1515;
+    font-family: Bentham serif;
+}
+
+
+
+
+
+
+
+
+
+
+button {
+    padding: 4px;
+    border: none;
+    background-color: #9dc1e7;
+    color: #4d1515;
+    cursor: pointer;
+    border-radius: 3px;
+}
