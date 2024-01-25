@@ -141,8 +141,11 @@ section#event {
 }
 
 #info > h2 {
-    font-size: 38px;
     text-align: center;
+}
+
+.big {
+    font-size: 34px;
 }
 
 #info > h4 {
