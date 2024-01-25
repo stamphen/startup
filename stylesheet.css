@@ -165,8 +165,11 @@ form {
 form > div {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: start;
+}
+
+form > div:not([id='top']) {
+    align-items: center;
 }
 
 label {
@@ -175,6 +178,22 @@ label {
 
 input:not([id='event_dates1']) {
     margin-right: .5em;
+    font-family: Bentham, sans-serif;
+    font-size: 16px;
+}
+
+label[for='comment'] {
+    align-items: top;
+}
+
+textarea {
+    margin-right: .5em;
+    font-family: Bentham, sans-serif;
+    font-size: 16px;
+}
+
+#tall {
+    height: 24px;
 }
 
 #pictures_old {
