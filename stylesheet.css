@@ -26,7 +26,7 @@ body {
 header, footer, main {
     padding: .3em 1em;
     border-radius: .6em;
-    margin: .13em .3em;
+    margin: .13em .3em 0;
 }
 
 header, footer {
@@ -176,6 +176,37 @@ label {
 input:not([id='event_dates1']) {
     margin-right: .5em;
 }
+
+#pictures_old {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+    grid-gap: 1em;
+    margin: .5em 0;
+}
+
+#pictures_old > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#pictures_old > div > img {
+    flex: 1;
+    max-width: 200px;
+    max-height: 170;
+}
+
+#pictures_old > div > span {
+    flex: 0 30px;
+}
+
+#pictures_input {
+    display: auto;
+}
+
+
 
 
 
