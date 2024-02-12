@@ -1,5 +1,7 @@
 # notes
 ***Startup Application URL -->*** <url>https://familyjournal.click</url>
+***Startup URL -->*** <url>https://startup.familyjournal.click</url>
+***Simon URL -->*** <url>https://simon.familyjournal.click</url>
 
 ## List of helpful Git functions:
 - `git init` (create git repository in the directory you're in)
@@ -69,7 +71,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - I just uploaded the HTML for the simon application to <url>https://simon.familyjournal.click</url>. I did this by running `./deployFiles.sh -k [key pair file] -h familyjournal.click -s simon`. The deployFiles.sh file essentially tells the console what to do. It deletes any previous simon files, then creates a new directory and copies all of the simon files. I also copied the deployFiles.sh file to my startup repository, so I can use it when I start uploading my own files. 
 - I was able to also upload my startup repository using essentially the same command: `./deployFiles.sh -k [key pair file] -h familyjournal.click -s startup`.  
 
-## HTML Notes/>
+## HTML Notes />
 - Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
 - Sync Javascript file with `<script src="java.js"></script>`
 (both only need to be in the `<head>` section, and you can change the file names)
@@ -79,7 +81,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - `<body>` is divided into three sections: `<header>` `<main>`, and `<footer>`. Within these sections we can have smaller `<section>` groups or use `<nav>` to go to different places. Within sections we can use smaller blocks `<div>` to organize the webpage. Also use `<aside>` for comments that do not match the flow of information. 
 - Use `<form>` for all user input. It's very helpful to organize the webpage into what is happening where. 
 
-## HTML Deliverable:
+## HTML Deliverable />
 - This is super exciting!! I have mostly finished the HTML pages for my HTML deliverable.
 - I will have five HTML pages, four of which will be in the navigation bar. These are index.html (login), main.html (where each event and its comments are displayed), pics.html (where you can upload pictures to the event), events.html (where you can see, change between, and add events), and event_create.html (not visible, is the page where you actually create the events.) 
 - I will use javascript for the login/creating account, and for creating new events, making comments, etc.
@@ -89,16 +91,23 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - I need to store the person's name (username) so that I can automatically add it to each of their comments and image uploads. 
 - Everytime someone submits a comment or uploads an image or creates a new event, the comment and picture lists will update. 
 
-## CSS Notes;
+## CSS Notes ;
 - When specifying the width of a container, padding, margins, etc., you can use percentages. This could be really useful when displaying on different screen sizes. 
 - The parameters `max-width` and `max-height` can also be very useful with screen sizes. I'll probably use a fixed width/height, with a percentage max-width/max-height.
 - When specifying margins, padding, borders the order is top, right, bottom, left. 
 - Use the `float:right;` parameter (and left) to place object next to each other. Use `clear:both;` on the next item down so it won't float. 
 - `text-transform` is very useful. You can use `:capitalize;`, `:uppercase;`, and `:lowercase;`, as well as some others. 
 - Another cool thing I learned is `cursor: pointer;`. You could use this on a button, so the cursor changes when you hover over it. 
-- You can change styles for an element with a specific class by typing `h2.top_left`, or change the styles of all tags with the same class by typing `*top_right`. You can change every element on the page by using `*`. 
+- You can change styles for an element with a specific class by typing `h2.top_left`, or change the styles of all tags with the same class by typing `*top_right`. You can change every element on the page by using `*`.
+- Using classes to shorter the CSS code can be very helpful, then refer to the classes in the html code. This way you don't have to specify every CSS property for every element. It makes CSS shorter and more organized.
 
-## Javascript Notes{}
+## CSS Deliverable ;
+- I added pretty styling to all of my html pages, including rounded corners for the header, main, and footer. Headers and footers are blue, main is a light creamish color, and the background of all the elements is a gray.
+- On the main and pictures pages, I have a "header" with the event name, dates, and picture. I formatted it so the picture is to the left of the event name and dates, but it will switch to have the picture on top if the screen width is small enough.
+- I used @font-face to upload a font named Bentham to use throughout my website.
+- Used button:hover to change button color when hovered over. Also used a:hover to change the background color of links.
+
+## JavaScript Notes {}
 - Very useful to use the `onclick` attribute of a button to run a Javascript function. 
 - Use `document.getElementById('chaser').innerHTML = 'new heading'` to change what the heading used to say. This could trigger off a pushed button. 
 - Arrays are like Python lists. Can use `.length` for array length, `.push('new info')` to add something to the array, and more. 
@@ -107,3 +116,5 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - ``console.log('important info here')`` can be a very useful command for storing and accessing information like what the user input, or how the webpage is running. Use ctrl+shift+j to access the console on Chrome. 
 - For and If loops are of the format ```if (condition) {do this} // for (define variable; condition; increment variable) {do this}```
 - Define functions by typing `function function_name(parameters) {function code}`
+
+## JavaScript Deliverable {}
