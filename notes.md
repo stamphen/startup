@@ -116,5 +116,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - ``console.log('important info here')`` can be a very useful command for storing and accessing information like what the user input, or how the webpage is running. Use ctrl+shift+j to access the console on Chrome. 
 - For and If loops are of the format ```if (condition) {do this} // for (define variable; condition; increment variable) {do this}```
 - Define functions by typing `function function_name(parameters) {function code}`
+- You can create if/else if loops. Of form ```if (condition) {<br>do this<br>} else if (condition) {<br>do this<br>}```
+- You can shorten the if/else loops by typing: `condition ? action-if-true : action-if-not-true;`
 
 ## JavaScript Deliverable {}
