@@ -1,7 +1,7 @@
 # notes
-***Startup Application URL -->*** <url>https://familyjournal.click</url>
-***Startup URL -->*** <url>https://startup.familyjournal.click</url>
-***Simon URL -->*** <url>https://simon.familyjournal.click</url>
+***Startup Application URL -->*** <url>https://familyjournal.click</url><br/>
+***Startup URL -->*** <url>https://startup.familyjournal.click</url><br />
+***Simon URL -->*** <url>https://simon.familyjournal.click</url><br />
 
 ## List of helpful Git functions:
 - `git init` (create git repository in the directory you're in)
@@ -118,5 +118,9 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - Define functions by typing `function function_name(parameters) {function code}`
 - You can create if/else if loops. Of form ```if (condition) {<br>do this<br>} else if (condition) {<br>do this<br>}```
 - You can shorten the if/else loops by typing: `condition ? action-if-true : action-if-not-true;`
+- Boolean operators for if/for loops include `&&`(and), `||`(or), and `!`(not)
+- Can use different kinds of loops, such as while, do/while, for a in _, for b of _, as well as use continue/break to interrupt the loop if a certain condition is met.
+- There are several ways to manipulate strings in JavaScript, including: `length`- returns the number of characters in the string, `indexOf()`- returns the starting index of the substring inside the parenthesis (if the string h is 'hello', then the function `h.indexOf('lo')` will return 3, the index of the l), `split()`- splits the string into an array (python list) divided along the the given index (so `h.split(2)` would return `['he','lo']`, `startsWith()`- return True if the string does start with what you claim, False if it doesn't (`h.startsWith('he')` would return True), `endsWith()`- does the same thing but for the ending of the string, `toLowerCase()`- converts all characters to lowercase.
+- You can use the arrow function (`=>`) instead of `function`. For example, `(parameters) => output`. You can also use curly brackets and it will act like a normal function. (`(parameters) => {do this-needs a return statement}`). 
 
 ## JavaScript Deliverable {}
