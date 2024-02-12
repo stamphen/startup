@@ -7,16 +7,16 @@
         <title>The Family Journal</title>
     </head>
 
-    <body>
-        <header>
+    <body class="flexcolumn">
+        <header class="flexrow">
             <h1>The Family Journal</h1>
             <span></span>
             <nav>
-                <menu>
-                    <li><a href="index.html">Login</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="main.html">Main Page</a></li>
-                    <li><a href="pics.html">Pictures</a></li>
+                <menu class="flexrow">
+                    <li class="flexrowcent"><a href="index.html">Login</a></li>
+                    <li class="flexrowcent"><a href="events.html">Events</a></li>
+                    <li class="flexrowcent"><a href="main.html">Main Page</a></li>
+                    <li class="flexrowcent"><a href="pics.html">Pictures</a></li>
                 </menu>
             </nav>
             <h3>User: <span>Thomas</span></h3>
@@ -25,35 +25,35 @@
 
         <main>
             <form method="get" action="main.html">
-                <div>
+                <div class="flexrow">
                     <label for="event_name">Event Name:</label>
                     <input required type="text" id="event_name" />
                 </div>
                 <br />
-                <div>
+                <div class="flexrow">
                     <label for="event_pic">Event Picture:</label>
                     <input required type="file" id="event_pic" />
                 </div>
                 <br />
-                <div>
+                <div class="flexrow">
                     <label for="event_dates">Dates:</label>
                     <input required type="date" id="event_dates1" />
                 - 
                     <input required type="date" id="event_dates2" />
                 </div>
                 <br />
-                <div>
+                <div class="flexrow">
                     <label for="members">Members: (type someone's username and click add person. Repeat until all desired members have been added)</label>
                     <br />
                     <input required type="text" id="members" />
 
                     <button type="button">Add Person</button>
                 </div>
-                <ul>
+                <ul class="flexcolumn">
                     <li>Thomas</li>
                     <li>Kenzie</li>
                 </ul>
-                <div>
+                <div class="flexrow">
                     <button type="submit">Create New Event</button>
                 </div>
             </form>
@@ -62,7 +62,7 @@
             <hr />
         </main>
 
-        <footer>
+        <footer class="flexcolumn">
             <span>Author: Adam Johnson</span>
             <a href="https://github.com/stamphen/startup.git">My GitHub Repository</a>
         </footer>

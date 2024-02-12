@@ -7,16 +7,16 @@
         <title>The Family Journal</title>
     </head>
 
-    <body>
-        <header>
+    <body class="flexcolumn">
+        <header class="flexrow">
             <h1>The Family Journal</h1>
             <span></span>
             <nav>
-                <menu>
-                    <li><a href="index.html">Login</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="main.html">Main Page</a></li>
-                    <li><a href="pics.html">Pictures</a></li>
+                <menu class="flexrow">
+                    <li class="flexrowcent"><a href="index.html">Login</a></li>
+                    <li class="flexrowcent"><a href="events.html">Events</a></li>
+                    <li class="flexrowcent"><a href="main.html">Main Page</a></li>
+                    <li class="flexrowcent"><a href="pics.html">Pictures</a></li>
                 </menu>
             </nav>
             <h3>User: <span>Thomas</span></h3>
@@ -26,20 +26,20 @@
         <main>
             <h3 class="big">Your Events:</h3>
             <hr />
-            <ul>
+            <ul class="flexcolumn">
                 <li><a href="main.html">Florida Vacation</a></li>
                 <li><a href="main.html">California Redwoods Trip</a></li>
                 <li><a href="main.html">Arches National Park</a></li>
             </ul>
             <form action="event_create.html">
-                <div>
+                <div class="flexrow">
                     <button type="submit">Create New Event</button>
                 </div>
             </form>
             <hr />
         </main>
 
-        <footer>
+        <footer class="flexcolumn">
             <span>Author: Adam Johnson</span>
             <a href="https://github.com/stamphen/startup.git">My GitHub Repository</a>
         </footer>

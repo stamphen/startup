@@ -7,16 +7,16 @@
         <title>The Family Journal</title>
     </head>
 
-    <body>
-        <header>
+    <body class="flexcolumn">
+        <header class="flexrow">
             <h1>The Family Journal</h1>
             <span></span>
             <nav>
-                <menu>
-                    <li><a href="index.html">Login</a></li>
-                    <li><a href="events.html">Events</a></li>
-                    <li><a href="main.html">Main Page</a></li>
-                    <li><a href="pics.html">Pictures</a></li>
+                <menu class="flexrow">
+                    <li class="flexrowcent"><a href="index.html">Login</a></li>
+                    <li class="flexrowcent"><a href="events.html">Events</a></li>
+                    <li class="flexrowcent"><a href="main.html">Main Page</a></li>
+                    <li class="flexrowcent"><a href="pics.html">Pictures</a></li>
                 </menu>
             </nav>
             <h3>User: <span>Thomas</span></h3>
@@ -24,9 +24,9 @@
         </header>
 
         <main>
-            <section id="event">
+            <section id="event" class="flexrow">
                 <img id="main_pic" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Ffamily-beach-vacation-back-view-happy-tropical-34560379.jpg&f=1&nofb=1&ipt=6f01c3a9cd9a58dfb13f08c756d2118bbdb9086b5c0786e8e25bd71f85ff6e7e&ipo=images" />
-                <div id="info">
+                <div id="info" class="flexcolumncent">
                     <h2 class="big">Florida Family Vacation!</h2>
                     <h4>Date: July 14<sup>th</sup>-19<sup>th</sup>, 2017</h4>
                     <a href="pics.html">Pictures</a>
@@ -54,7 +54,7 @@
                 </div>
                 <div id="comments_input">
                     <form method="get" action="main.html">
-                        <div id="top">
+                        <div id="top" class="flexrow">
                             <label for="comment">Reply:</label>
                             <textarea placeholder="Your Comment Here" rows="4" cols="60"></textarea>
                             <button id="tall" type="submit">Submit</button>
@@ -65,7 +65,7 @@
             <hr />
         </main>
 
-        <footer>
+        <footer class="flexcolumn">
             <span>Author: Adam Johnson</span>
             <a href="https://github.com/stamphen/startup.git">My GitHub Repository</a>
         </footer>
