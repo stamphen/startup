@@ -38,7 +38,7 @@ body {
 
 header, footer, main {
     padding: .3em 1em;
-    border-radius: .6em;
+    border-radius: .4em;
     margin: .13em .3em 0;
 }
 
@@ -244,7 +244,7 @@ main > ul {
 
 button {
     padding: 4px;
-    border: 1.2px solid #9dc1e7;
+    border: none;
     background-color: #9dc1e7;
     color: #4d1515;
     cursor: pointer;
@@ -254,5 +254,9 @@ button {
 }
 
 button:hover {
-    background-color: #eae7e7;
+    background-color: #afa3a3;
+}
+
+.spacing{
+    padding: 0 0 7px;
 }
