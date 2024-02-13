@@ -121,7 +121,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - Boolean operators for if/for loops include `&&`(and), `||`(or), and `!`(not)
 - Can use different kinds of loops, such as while, do/while, for a in _, for b of _, as well as use continue/break to interrupt the loop if a certain condition is met.
 - There are several ways to manipulate strings in JavaScript, including: `length`- returns the number of characters in the string, `indexOf()`- returns the starting index of the substring inside the parenthesis (if the string h is 'hello', then the function `h.indexOf('lo')` will return 3, the index of the l), `split()`- splits the string into an array (python list) divided along the the given index (so `h.split(2)` would return `['he','lo']`, `startsWith()`- return True if the string does start with what you claim, False if it doesn't (`h.startsWith('he')` would return True), `endsWith()`- does the same thing but for the ending of the string, `toLowerCase()`- converts all characters to lowercase.
-- You can use the arrow function (`=>`) instead of `function`. For example, `(parameters) => output`. You can also use curly brackets and it will act like a normal function. (`(parameters) => {do this-needs a return statement}`).
+- You can use the arrow function (`=>`) instead of `function`. For example, `(parameters) => output`. You can also use curly brackets and it will act like a normal function. (`(parameters) => {do this}`).
 - You can listen for many different web events. For example:
 ```
 const submitDataEl = document.querySelector('#submitData');
