@@ -131,5 +131,14 @@ submitDataEl.addEventListener('click', function (event) {
 ```
 - This will search the document for the element which has the id of submitData, then listen for when that element is 'clicked', then log the event name (click in this case) in the console.
 - The events you can listen for include: click, keypress, scroll, text selection, clipboard events (copy, paste, etc.), and many more. A full list is shown [here](https://developer.mozilla.org/en-US/docs/Web/Events)
+- You can create HTML elements and ad them as child elements of existing HTML. This will be super useful if I need to create a new element to store additional comments made on my familyjournal page. You can then add it to `<main id="mainthing">`:
+```
+const divElement = document.createElement("div");
+const main = document.getElementById("mainthing");
+main.appendChild(divElement);
+```
+- You can also add classes to elements, so they're affected by CSS. For example: `main.classList.add("flexrowcent")`
+- Delete children of an element by using: `div.removeChild(div.firstChild)` (presumably you could also just type in the name or id of the child)
+- Using `div.innerHTML` you can replace whatever was contained in the div with whatever you want. This can potentially leave your website open to hackers though, so it should probably be minimized.
 
 ## JavaScript Deliverable {}
