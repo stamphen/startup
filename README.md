@@ -36,3 +36,9 @@ I finished the structure of my web application using HTML.
 - **Images**: Images will be able to be uploaded by the user when 1.) they create a new event, and 2.) when they upload an image to the pictures page of an event. 
 - **Database**: (I need to recall some data stored in a database and display it.) I will store the name and password of each person, and display the name on every page except the login page. Also, the web application will automatically display the name beneath each comment submitted and picture uploaded by the user. The server will also store event info, comments made, and pictures uploaded. This data will need to be accessed and displayed repeatedly. 
 - **WebSocket**: (Realtime data from the server.) This will be the comments that others make. Whenever anyone submits a comment, uploads a picture, or creates an event, the server will send that data to everyone else in realtime. This will allow conversations and quick communication to occur. 
+
+
+## CSS Deliverable:
+I finished applying CSS styles to my HTML web application
+- **Pages**: I only have one CSS page, which is linked in each of my HTML pages.
+- 
