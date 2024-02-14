@@ -116,7 +116,14 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - ``console.log('important info here')`` can be a very useful command for storing and accessing information like what the user input, or how the webpage is running. Use ctrl+shift+j to access the console on Chrome. 
 - For and If loops are of the format ```if (condition) {do this} // for (define variable; condition; increment variable) {do this}```
 - Define functions by typing `function function_name(parameters) {function code}`
-- You can create if/else if loops. Of form ```if (condition) {<br>do this<br>} else if (condition) {<br>do this<br>}```
+- You can create if/else if loops. Of form
+```
+if (condition) {
+  do this
+} else if (condition) {
+  do this
+}
+```
 - You can shorten the if/else loops by typing: `condition ? action-if-true : action-if-not-true;`
 - Boolean operators for if/for loops include `&&`(and), `||`(or), and `!`(not)
 - Can use different kinds of loops, such as while, do/while, for a in _, for b of _, as well as use continue/break to interrupt the loop if a certain condition is met.
@@ -131,7 +138,7 @@ submitDataEl.addEventListener('click', function (event) {
 ```
 - This will search the document for the element which has the id of submitData, then listen for when that element is 'clicked', then log the event name (click in this case) in the console.
 - The events you can listen for include: click, keypress, scroll, text selection, clipboard events (copy, paste, etc.), and many more. A full list is shown [here](https://developer.mozilla.org/en-US/docs/Web/Events)
-- You can create HTML elements and ad them as child elements of existing HTML. This will be super useful if I need to create a new element to store additional comments made on my familyjournal page. You can then add it to `<main id="mainthing">`:
+- You can create HTML elements and add them as child elements of existing HTML. This will be super useful if I need to create a new element to store additional comments made on my familyjournal page. You can then add it to `<main id="mainthing">`:
 ```
 const divElement = document.createElement("div");
 const main = document.getElementById("mainthing");

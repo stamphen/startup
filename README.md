@@ -39,6 +39,10 @@ I finished the structure of my web application using HTML.
 
 
 ## CSS Deliverable:
-I finished applying CSS styles to my HTML web application
-- **Pages**: I only have one CSS page, which is linked in each of my HTML pages.
-- 
+I finished applying CSS styles to my HTML web application. I think the website looks neat and pretty, and I'm happy with the result. 
+- **Header/Footer/Main**- I chose to put rounded edges on all three of these elements. The header and footer and both the same blue color, and the main element is a creamish color. I think this makes the website look nicer and cleaner. Behind them all is a gray background to help the elements pop out. 
+- **Fonts**- I imported a new font called Bentham in my CSS stylesheet, and I used it for all of my elements except the buttons. This is because on the buttons the Bentham font looks too small on the buttons. Any user input is also automatically in the Bentham font. I also had all the words appear in the same color.
+- **Responsive Design**- I did several things to help the website work on different screen sizes. On the main.html and pics.html pages, there is a header with the event name, dates, and picture. By default, the picture floats left and the name and dates float right. I made it so if the screen size gets small enough the name and dates will appear beneath the picture. For the comments on the main.html page, I included a maximum width, so if the screen gets smaller the comments will automatically shrink. For the pictures on the pics.html page, I used a grid design, so it will display as many pictures in a row as it can, but will automatically display less if the screen size is smaller. 
+- **Application elements**- I added padding and margins and flex so each element is clearly seen and looks good on the page. To have more control over this, I started by setting the default padding and margins to 0 for every element. I also worked on spacing so the login screen looks nicer, and the elements are closer together.
+- **Buttons/Links**- I did some special styling for buttons and links. Both of them will change to a different color when hovered over. This makes it clear to the user that clicking the button or link will do something. For the navigation links up top, I removed the underline and spaced them out evenly.
+- **Images**- I added a border to the event picture, so it stands out, and used grid styling for the pictures on the pics.html page. 
