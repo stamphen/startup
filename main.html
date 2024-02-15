@@ -20,7 +20,7 @@
                     <li class="flexrowcent"><a href="pics.html">Pictures</a></li>
                 </menu>
             </nav>
-            <h3>User: <span>Thomas</span></h3>
+            <h3>User: <span id="user_name">Julie</span></h3>
             <hr />
         </header>
 
@@ -39,12 +39,12 @@
                     <div>
                         <p>
                             One of my favorite parts about the vacation was the steak house we visiting our last night there. Do you guys remember that? Best steak I've had in my life, for sure! I also really loved taking a nap on the sand in the middle of the day. 
-                            <br />
+                        <br />
                             <span>-Dad</span>
                         </p>
                     </div>
                     <hr />
-                    <div>
+                    <div id="divEl">
                         <p>
                             Dad, I totally agree, the steak house was marvelous. I loved swimming in the green water. I don't think any of you guys saw, but there was a big barrel or something underneath the water a few hundred feet out. I got some goggles and dove down. Wish I'd had a camera though.
                         <br />
@@ -57,8 +57,8 @@
                     <form method="get" action="main.html">
                         <div id="top" class="flexrow">
                             <label for="comment">Reply:</label>
-                            <textarea placeholder="Your Comment Here" rows="4" cols="60" id="new_comment"></textarea>
-                            <button id="tall" type="submit" onclick="comment()">Submit</button>
+                            <textarea placeholder="Your Comment Here" id="new_comment" rows="4" cols="60"></textarea>
+                            <button id="tall" type="button" onclick="comment()">Submit</button>
                         </div>
                     </form>
                 </div>
