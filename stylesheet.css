@@ -216,7 +216,7 @@ textarea {
 #pictures_old > div > img {
     flex: 1;
     max-width: 200px;
-    max-height: 170;
+    max-height: 170px;
 }
 
 #pictures_old > div > span {
