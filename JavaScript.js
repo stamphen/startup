@@ -81,8 +81,8 @@ function logged_in_data() {
     if ("logged-in" in localStorage) {
         console.log("Logged in!")
         
-        
-        //if (document.location.href = "/index.html") {
+        let local = document.location.href
+        if (local = "https://startup.familyjournal.click/index.html") {
             console.log("hi")
             try {
                 document.getElementById("hidden_nav1").removeAttribute("hidden")
@@ -108,7 +108,7 @@ function logged_in_data() {
         const txt = document.createTextNode
         txt.innerText = current_user
         name.appendChild = txt
-    //} else {
+    } else {
         console.log("Not logged in!")
         try {
             document.getElementById("hidden_nav1").setAttribute("hidden",true)
@@ -124,7 +124,7 @@ function logged_in_data() {
             }, 300);
         }
         }
-    //}
+    }
 
 function logout() {
     localStorage.removeItem("logged-in")
@@ -153,8 +153,8 @@ function new_event() {
     const new_peeps = document.getElementById("people_list")
     let add_members = []
     for (chil of new_peeps.children) {
-        console.log(chil)
-        console.log(chil.children)
-        }
+        add_members.push(chil.innerText)
     }
+    
+    
 }
