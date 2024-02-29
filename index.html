@@ -15,9 +15,9 @@
             <nav>
                 <menu class="flexrow">
                     <li class="flexrowcent"><a href="index.html">Login</a></li>
-                    <li class="flexrowcent"><a href="events.html">Events</a></li>
-                    <li class="flexrowcent"><a href="main.html">Main Page</a></li>
-                    <li class="flexrowcent"><a href="pics.html">Pictures</a></li>
+                    <li class="flexrowcent"><a href="events.html" id="hidden_nav1" hidden>Events</a></li>
+                    <li class="flexrowcent"><a href="main.html" id="hidden_nav2" hidden>Main Page</a></li>
+                    <li class="flexrowcent"><a href="pics.html" id="hidden_nav3" hidden>Pictures</a></li>
                 </menu>
             </nav>
             <hr />
@@ -41,6 +41,7 @@
                 <div class="flexrow">
                     <button type="submit" onclick="login()" id="login_btn">Login</button>
                     <button type="submit" onclick="create_account()" id="create_btn">Create Account</button>
+                    <button type="submit" onclick="logout()" id="logout_btn" hidden>Logout</button>
                 </div>
             </form>
             <hr />
