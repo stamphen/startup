@@ -1,5 +1,15 @@
 window.onload = logged_in_data();
 
+//let local = document.location.href
+
+//if (local = "https://startup.familyjournal.click/main.html"){
+//    console.log("yep")
+//    const main_pic = document.querySelector("#main_pic")
+//    main_pic.addEventListener("DOMContentLoaded", ev_pc())
+//}
+
+
+
 function comment() {
     const neww_commment = document.getElementById("new_comment");
     const nw_cmnt = document.createElement("div");    
@@ -80,47 +90,25 @@ function create_account() {
 function logged_in_data() {
     if ("logged-in" in localStorage) {
         console.log("Logged in!")
-        
         let local = document.location.href
         if (local = "https://startup.familyjournal.click/index.html") {
-            console.log("hi")
             try {
                 document.getElementById("hidden_nav1").removeAttribute("hidden")
-                document.getElementById("hidden_nav2").removeAttribute("hidden")
-                document.getElementById("hidden_nav3").removeAttribute("hidden")
-                document.getElementById("logout_btn").removeAttribute("hidden")
             } catch {
             setTimeout(() => {
                 document.getElementById("hidden_nav1").removeAttribute("hidden")
-                document.getElementById("hidden_nav2").removeAttribute("hidden")
-                document.getElementById("hidden_nav3").removeAttribute("hidden")
-                document.getElementById("logout_btn").removeAttribute("hidden")
             }, 300);
             }
         }
         const current_user = localStorage.getItem("logged-in")
         console.log(current_user)
-        console.log("nope")
-        const name = document.getElementById("user_name")
-        console.log(typeof(name))
-        console.log(name)
-        console.log(typeof(current_user))
-        const txt = document.createTextNode
-        txt.innerText = current_user
-        name.appendChild = txt
     } else {
         console.log("Not logged in!")
         try {
             document.getElementById("hidden_nav1").setAttribute("hidden",true)
-            document.getElementById("hidden_nav2").setAttribute("hidden",true)
-            document.getElementById("hidden_nav3").setAttribute("hidden",true)
-            document.getElementById("logout_btn").setAttribute("hidden",true)
         } catch {
             setTimeout(() => {
                 document.getElementById("hidden_nav1").setAttribute("hidden",true)
-                document.getElementById("hidden_nav2").setAttribute("hidden",true)
-                document.getElementById("hidden_nav3").setAttribute("hidden",true)
-                document.getElementById("logout_btn").setAttribute("hidden",true)
             }, 300);
         }
         }
@@ -146,10 +134,11 @@ function add_person() {
 }
 
 function new_event() {
+    console.log("new_event_happening")
     const event_name = document.getElementById("event_name").value
     const event_pic = document.getElementById("event_pic").value
-    const event_date_1 = document.getElementById("event_dates_1").files
-    const event_date_2 = document.getElementById("event_dates_2").files[0]
+    const event_date_1 = document.getElementById("event_dates_1")
+    const event_date_2 = document.getElementById("event_dates_2")
     const new_peeps = document.getElementById("people_list")
     let add_members = []
     for (chil of new_peeps.children) {
@@ -159,12 +148,13 @@ function new_event() {
     localStorage.setItem(JSON.stringify(event_name), JSON.stringify(event_data))
     console.log(localStorage.getItem(JSON.stringify(event_name)))
     console.log(JSON.stringify(event_name))
-    localStorage.setItem("current_event",JSON.stringify(event_name))
+    localStorage.setItem("current_event",event_name)
 }
 
-document.querySelector("#event_new_btn").setAttribute("formaction","main.html")
-    document.querySelector("#main_pic").src = URL.createObjectURL(event_pic.files[0])
-    document.querySelector("#event_namen").textContent = event_name
+    //document.querySelector("#event_new_btn").setAttribute("formaction","main.html")
+    //document.querySelector("#main_pic").src = URL.createObjectURL(event_pic.files[0])
+    //document.querySelector("#event_namen").textContent = event_name
+
 
 function current_user() {
     console.log('hi!!')
@@ -172,3 +162,24 @@ function current_user() {
     const curr_use = localStorage.getItem("logged-in")
     display_user.textContent = "User: "+curr_use
 }
+
+function ev_pc() {
+    console.log(localStorage)
+    const event_pic = document.querySelector("#main_pic")
+    const event = localStorage.getItem("current_event")
+    console.log(event)
+    const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)))
+    console.log(event_data)
+    console.log("success!!!")
+    console.log(event_data.pic)
+    new_url = URL.createObjectURL(event_data.pic)
+    console.log(new_url)
+    event_pic.src = new_url
+}
+
+let chat = 'I loved that part of the vacation!! Honestly, we should totally do something again soon!';
+setInterval(() => {
+    chat = `${chat} plus the steak was glorious...`;
+    document.querySelector('#new_comment').textContent = chat;
+    comment()
+}, 10000);
