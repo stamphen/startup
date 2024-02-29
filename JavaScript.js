@@ -1,18 +1,92 @@
-window.onload = logged_in_data();
-window.onload = names();
 
-//let local = document.location.href
+// Adding onload event listeners to check if a user is logged in, and display data
 
-//if (local = "https://startup.familyjournal.click/main.html"){
-//    console.log("yep")
-//    const main_pic = document.querySelector("#main_pic")
-//    main_pic.addEventListener("DOMContentLoaded", ev_pc())
-//}
+window.addEventListener("DOMContentLoaded",logged_in_data());
+window.addEventListener("DOMContentLoaded",names());
 
+function logged_in_data() {
+    if ("logged-in" in localStorage) {
+        const current_user = localStorage.getItem("logged-in");
+        console.log("User","'",current_user,"'","Logged in!");
+        try {
+            if (document.querySelector("#logout_btn")) {
+                document.getElementById("hidden_nav1").removeAttribute("hidden");
+                document.querySelector("#logout_btn").removeAttribute("hidden");
+            } else {
+                throw new Error("problem!");
+            };
+        } catch {
+        setTimeout(() => {
+            if (document.querySelector("#logout_btn")) {
+                document.getElementById("hidden_nav1").removeAttribute("hidden");
+                document.querySelector("#logout_btn").removeAttribute("hidden");
+            } else {
+                console.log("wrong_page");
+            };
+        }, 100);
+        };
+    } else {
+        console.log("Not logged in!");
+        try {
+            if (document.querySelector("#logout_btn")) {
+                document.getElementById("hidden_nav1").setAttribute("hidden",true);
+                document.querySelector("#logout_btn").setAttribute("hidden",true);
+            };
+        } catch {
+            setTimeout(() => {
+                if (document.querySelector("#logout_btn")) {
+                    document.getElementById("hidden_nav1").setAttribute("hidden",true);
+                    document.querySelector("#logout_btn").setAttribute("hidden",true);
+                };
+            }, 100);
+        };
+        //if (window.location.href = `${window.location.hostname}/index.html`) {
+        //    console.log("yo")
+        //console.log(window.location.href)    
+        //console.log(window.location.hostname)
+        //window.location.href = "/index.html"
+        
+    };
+    };
+
+function names() {
+    if ("current_user" in localStorage) {
+        const user = JSON.parse(localStorage.getItem("current_user"));
+        const user_name = document.querySelector("#user_name");
+        user_name.textContent = user;
+    };
+};
+
+
+// Adding onload event listeners to main.html to replace data with current event data (will do same for pics.html)
+if (document.querySelector("#main_pic")) {
+    console.log("main is here!");
+    const main_pic = document.querySelector("#main_pic");
+    main_pic.addEventListener("DOMContentLoaded", ev_pc());
+};
+
+function ev_pc() {
+    console.log(localStorage);
+    const event_pic = document.querySelector("#main_pic");
+    const event = localStorage.getItem("current_event");
+    console.log(event);
+    const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)));
+    console.log(event_data);
+    console.log("success!!!");
+    console.log(event_data.pic);
+    new_url = URL.createObjectURL(event_data.pic);
+    console.log(new_url);
+    event_pic.src = new_url;
+};
+    
+
+// This function will only be called in the console to help with debugging
 function clear() {
     localStorage.clear()
 }
 
+
+// Event interaction functions
 function comment() {
     const neww_commment = document.getElementById("new_comment");
     const nw_cmnt = document.createElement("div");    
@@ -48,6 +122,8 @@ function submit_pic() {
     pic_img.src = pic_url;  
 };
 
+
+// Login functions
 function login() {
     const btn = document.getElementById("login_btn");
     if (btn.hasAttribute("formaction")) {
@@ -90,46 +166,33 @@ function create_account() {
     };
 };
 
-function logged_in_data() {
-    if ("logged-in" in localStorage) {
-        console.log("Logged in!");
-        let local = document.location.href;
-        if (local = "https://startup.familyjournal.click/index.html") {
-            try {
-                document.getElementById("hidden_nav1").removeAttribute("hidden");
-            } catch {
-            setTimeout(() => {
-                document.getElementById("hidden_nav1").removeAttribute("hidden");
-            }, 300);
-            };
-        };
-        const current_user = localStorage.getItem("logged-in");
-        console.log(current_user);
-    } else {
-        console.log("Not logged in!");
-        try {
-            document.getElementById("hidden_nav1").setAttribute("hidden",true);
-        } catch {
-            setTimeout(() => {
-                document.getElementById("hidden_nav1").setAttribute("hidden",true);
-            }, 300);
-        };
-        };
-    };
-
 function logout() {
     localStorage.removeItem("logged-in");
 }
 
+
+// Create Event functions
 function add_person() {
     const new_perp = document.getElementById("members").value;
     const perp_list = document.getElementById("people_list");
+    let varia = false
+    console.log(perp_list.children)
     if (new_perp in localStorage) {
-        console.log("Person Successfully Added!");
-        const new_person = document.createElement("li");
-        const person_text = document.createTextNode(new_perp);
-        new_person.appendChild(person_text);
-        perp_list.appendChild(new_person);
+        for (perp in perp_list.children) {
+            console.log(perp.value);
+            console.log(new_perp);
+            if (perp.textContent = new_perp) {
+                console.log("Person already added!");
+                varia = true;
+            };
+        };
+        if (varia !== true) {
+            console.log("Person Successfully Added!");
+            const new_person = document.createElement("li");
+            const person_text = document.createTextNode(new_perp);
+            new_person.appendChild(person_text);
+            perp_list.appendChild(new_person);
+        };
     } else {
         console.log("No person with this username!");
         alert('No person with this username!');
@@ -166,29 +229,13 @@ function current_user() {
     display_user.textContent = "User: "+curr_use;
 }
 
-function ev_pc() {
-    console.log(localStorage);
-    const event_pic = document.querySelector("#main_pic");
-    const event = localStorage.getItem("current_event");
-    console.log(event);
-    const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)));
-    console.log(event_data);
-    console.log("success!!!");
-    console.log(event_data.pic);
-    new_url = URL.createObjectURL(event_data.pic);
-    console.log(new_url);
-    event_pic.src = new_url;
-};
 
 let chat = 'I loved that part of the vacation!! Honestly, we should totally do something again soon!';
 setInterval(() => {
     chat = `${chat} plus the steak was glorious...`;
-    document.querySelector('#new_comment').textContent = chat;
-    comment();
+    if (document.querySelector("#new_comment")) {
+        document.querySelector('#new_comment').textContent = chat;
+        comment();
+    };
 }, 10000);
 
-function names() {
-    const user = JSON.parse(localStorage.getItem("current_user"))
-    const user_name = document.querySelector("#user_name")
-    user_name.textContent = user
-}
