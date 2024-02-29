@@ -20,8 +20,6 @@ function logged_in_data() {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").removeAttribute("hidden");
                 document.querySelector("#logout_btn").removeAttribute("hidden");
-            } else {
-                console.log("wrong_page");
             };
         }, 100);
         };
@@ -40,14 +38,8 @@ function logged_in_data() {
                 };
             }, 100);
         };
-        //if (window.location.href = `${window.location.hostname}/index.html`) {
-        //    console.log("yo")
-        //console.log(window.location.href)    
-        //console.log(window.location.hostname)
-        //window.location.href = "/index.html"
-        
     };
-    };
+};
 
 function names() {
     setTimeout(() => {
@@ -80,6 +72,7 @@ if (document.querySelector("#main_pic")) {
 };
 
 function ev_pc() {
+    console.log("working");
     console.log(localStorage);
     const event_pic = document.querySelector("#main_pic");
     const event = localStorage.getItem("current_event");
@@ -189,16 +182,29 @@ function logout() {
 function add_person() {
     const new_perp = document.getElementById("members").value;
     const perp_list = document.getElementById("people_list");
-    let varia = false
-    console.log(perp_list.children)
+    let varia = false;
+    console.log(perp_list.children);
     if (new_perp in localStorage) {
-        for (perp in perp_list.children) {
-            console.log(perp.value);
-            console.log(new_perp);
-            if (perp.textContent = new_perp) {
-                console.log("Person already added!");
-                varia = true;
+        console.log(perp_list);
+        if (perp_list.children.length >0) {
+            console.log("long")
+            for (per in perp_list.children) {
+                console.log("here")
+                console.log(perp_list.children)
+                console.log(per)
+                console.log(per.textContent)
+                console.log(per.innerText)
+            }
+            for (perp in perp_list.children) {
+                console.log(perp.value);
+                console.log(new_perp);
+                if (perp.textContent = new_perp) {
+                    console.log("Person already added!");
+                    varia = true;
+                };
             };
+        } else {
+            console.log("short");
         };
         if (varia !== true) {
             console.log("Person Successfully Added!");
