@@ -32,3 +32,46 @@ function submit_pic() {
     const pic_url = URL.createObjectURL(new_pic.files[0]);
     pic_img.src = pic_url;  
 }
+
+function login() {
+    const btn = document.getElementById("login_btn")
+    const username = document.getElementById("username").value
+    const pswrd = document.getElementById("password").value
+
+    console.log(localStorage)
+    if (username in localStorage) {
+        if (localStorage.getItem(username) === pswrd) {
+            console.log("Login Success!")
+            window.location.href = "https://startup.familyjournal.click/pics.html"
+        } else {
+            console.log("Incorrect Credentials!")
+            alert("Incorrect Credentials!")
+        }
+    } else {
+        console.log("Username not Found!")
+        alert("Username not Found!")
+    }
+        
+        
+    
+    //    console.log("invalid credentials!")
+    //    alert("invalid credentials!")
+    
+
+
+}
+
+function create_account() {
+    const btn = document.getElementById("create_btn")
+    const username = document.getElementById("username").value
+    const pswrd = document.getElementById("password").value
+    let new_credential = {user:username, pwd:pswrd}
+    if (username in localStorage) {
+        console.log("Account already exists!")
+        alert("Account already exists!")
+    } else {
+        localStorage.setItem(new_credential.user, new_credential.pwd)
+        console.log("Thanks for creating an account, ",username)
+        btn.hasAttribute("formaction", "events.html")
+    }
+}

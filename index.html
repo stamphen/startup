@@ -26,7 +26,7 @@
         <main>
             <h2 class="big">Login</h2>
             <hr />
-            <form method="get" action="events.html" class="flexcolumn">
+            <form method="get" class="flexcolumn">
                 <div class="flexrow">
                     <label for="username">Username:</label>
                     <input type="text" id="username" />
@@ -39,8 +39,8 @@
                 </div>
                 <span class="spacing"></span>
                 <div class="flexrow">
-                    <button type="submit">Login</button>
-                    <button type="submit">Create Account</button>
+                    <button type="submit" onclick="login()" id="login_btn">Login</button>
+                    <button type="submit" onclick="create_account()" id="create_btn">Create Account</button>
                 </div>
             </form>
             <hr />
