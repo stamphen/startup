@@ -80,26 +80,35 @@ function create_account() {
 function logged_in_data() {
     if ("logged-in" in localStorage) {
         console.log("Logged in!")
-        const user = localStorage.getItem("logged-in")
-        console.log(user)
-        if (document.getElementById("hidden_nav1").hasAttribute("hidden")) {
+        
+        
+        //if (document.location.href = "/index.html") {
+            console.log("hi")
             try {
                 document.getElementById("hidden_nav1").removeAttribute("hidden")
                 document.getElementById("hidden_nav2").removeAttribute("hidden")
                 document.getElementById("hidden_nav3").removeAttribute("hidden")
                 document.getElementById("logout_btn").removeAttribute("hidden")
             } catch {
-                setTimeout(() => {
-                    document.getElementById("hidden_nav1").removeAttribute("hidden")
-                    document.getElementById("hidden_nav2").removeAttribute("hidden")
-                    document.getElementById("hidden_nav3").removeAttribute("hidden")
-                    document.getElementById("logout_btn").removeAttribute("hidden")
-                }, 300);
+            setTimeout(() => {
+                document.getElementById("hidden_nav1").removeAttribute("hidden")
+                document.getElementById("hidden_nav2").removeAttribute("hidden")
+                document.getElementById("hidden_nav3").removeAttribute("hidden")
+                document.getElementById("logout_btn").removeAttribute("hidden")
+            }, 300);
             }
         }
+        const current_user = localStorage.getItem("logged-in")
+        console.log(current_user)
+        console.log("nope")
         const name = document.getElementById("user_name")
-        name.textContent = user
-    } else {
+        console.log(typeof(name))
+        console.log(name)
+        console.log(typeof(current_user))
+        const txt = document.createTextNode
+        txt.innerText = current_user
+        name.appendChild = txt
+    //} else {
         console.log("Not logged in!")
         try {
             document.getElementById("hidden_nav1").setAttribute("hidden",true)
@@ -115,8 +124,37 @@ function logged_in_data() {
             }, 300);
         }
         }
-    }
+    //}
 
 function logout() {
     localStorage.removeItem("logged-in")
+}
+
+function add_person() {
+    const new_perp = document.getElementById("members").value
+    const perp_list = document.getElementById("people_list")
+    if (new_perp in localStorage) {
+        console.log("Person Successfully Added!")
+        const new_person = document.createElement("li")
+        const person_text = document.createTextNode(new_perp)
+        new_person.appendChild(person_text)
+        perp_list.appendChild(new_person)
+    } else {
+        console.log("No person with this username!")
+        alert('No person with this username!')
+    }
+}
+
+function new_event() {
+    const event_name = document.getElementById("event_name")
+    const event_pic = document.getElementById("event_pic")
+    const event_date_1 = document.getElementById("event_dates_1")
+    const event_date_2 = document.getElementById("event_dates_2")
+    const new_peeps = document.getElementById("people_list")
+    let add_members = []
+    for (chil of new_peeps.children) {
+        console.log(chil)
+        console.log(chil.children)
+        }
+    }
 }

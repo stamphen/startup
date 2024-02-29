@@ -47,15 +47,12 @@
                     <label for="members">Members: (type someone's username and click add person. Repeat until all desired members have been added)</label>
                     <br />
                     <input required type="text" id="members" />
-
-                    <button type="button">Add Person</button>
+                    <button type="button" onclick="add_person()">Add Person</button>
                 </div>
-                <ul class="flexcolumn">
-                    <li>Thomas</li>
-                    <li>Kenzie</li>
+                <ul class="flexcolumn" id="people_list">
                 </ul>
                 <div class="flexrow">
-                    <button type="submit">Create New Event</button>
+                    <button type="submit" onclick="new_event()">Create New Event</button>
                 </div>
             </form>
 
