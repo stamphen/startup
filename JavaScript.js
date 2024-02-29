@@ -50,11 +50,25 @@ function logged_in_data() {
     };
 
 function names() {
-    if ("current_user" in localStorage) {
-        const user = JSON.parse(localStorage.getItem("current_user"));
-        const user_name = document.querySelector("#user_name");
-        user_name.textContent = user;
-    };
+    setTimeout(() => {
+        if (document.querySelector("#login_btn")) {
+        } else {
+            if ("logged-in" in localStorage) {
+                const user = localStorage.getItem("logged-in");
+                const nem = document.createTextNode(`User: ${user}`);
+                try {
+                    if (document.querySelector("#user_name")=null) {;
+                        throw new Error("nullloo");
+                    };
+                } catch {
+                    setTimeout(() => {
+                        const user_name = document.querySelector("#user_name");
+                        user_name.appendChild(nem);
+                    }, 100);
+                };
+            };
+        };
+    }, 100);
 };
 
 
