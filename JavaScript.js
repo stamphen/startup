@@ -35,14 +35,15 @@ function submit_pic() {
 
 function login() {
     const btn = document.getElementById("login_btn")
+    if (btn.hasAttribute("formaction")) {
+        btn.removeAttribute("formaction")
+    }
     const username = document.getElementById("username").value
     const pswrd = document.getElementById("password").value
-
-    console.log(localStorage)
     if (username in localStorage) {
         if (localStorage.getItem(username) === pswrd) {
             console.log("Login Success!")
-            window.location.href = "https://startup.familyjournal.click/pics.html"
+            btn.setAttribute("formaction", "events.html")
         } else {
             console.log("Incorrect Credentials!")
             alert("Incorrect Credentials!")
@@ -51,18 +52,13 @@ function login() {
         console.log("Username not Found!")
         alert("Username not Found!")
     }
-        
-        
-    
-    //    console.log("invalid credentials!")
-    //    alert("invalid credentials!")
-    
-
-
 }
 
 function create_account() {
     const btn = document.getElementById("create_btn")
+    if (btn.hasAttribute("formaction")) {
+        btn.removeAttribute("formaction")
+    }
     const username = document.getElementById("username").value
     const pswrd = document.getElementById("password").value
     let new_credential = {user:username, pwd:pswrd}
@@ -72,6 +68,6 @@ function create_account() {
     } else {
         localStorage.setItem(new_credential.user, new_credential.pwd)
         console.log("Thanks for creating an account, ",username)
-        btn.hasAttribute("formaction", "events.html")
+        btn.setAttribute("formaction", "events.html")
     }
 }
