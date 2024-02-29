@@ -1,4 +1,5 @@
 window.onload = logged_in_data();
+window.onload = names();
 
 //let local = document.location.href
 
@@ -183,3 +184,9 @@ setInterval(() => {
     document.querySelector('#new_comment').textContent = chat;
     comment()
 }, 10000);
+
+function names() {
+    const user = JSON.parse(localStorage.getItem("current_user"))
+    const user_name = document.querySelector("#user_name")
+    user_name.textContent = user
+}
