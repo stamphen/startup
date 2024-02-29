@@ -18,14 +18,14 @@
                     <li class="flexrowcent"><a href="events.html" id="hidden_nav1">Events</a></li>
                 </menu>
             </nav>
-            <h3><span id="user_name">nothing</span></h3>
+            <h3><span id="user_name" onload="current_user()"></span></h3>
             <hr />
         </header>
 
         <main>
             <h3 class="big">Your Events:</h3>
             <hr />
-            <ul class="flexcolumn">
+            <ul class="flexcolumn" onload="ev_list()" id="event_list_links">
                 <li><a href="main.html">Florida Vacation</a></li>
                 <li><a href="main.html">California Redwoods Trip</a></li>
                 <li><a href="main.html">Arches National Park</a></li>

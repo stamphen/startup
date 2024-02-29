@@ -146,15 +146,29 @@ function add_person() {
 }
 
 function new_event() {
-    const event_name = document.getElementById("event_name")
-    const event_pic = document.getElementById("event_pic")
-    const event_date_1 = document.getElementById("event_dates_1")
-    const event_date_2 = document.getElementById("event_dates_2")
+    const event_name = document.getElementById("event_name").value
+    const event_pic = document.getElementById("event_pic").value
+    const event_date_1 = document.getElementById("event_dates_1").files
+    const event_date_2 = document.getElementById("event_dates_2").files[0]
     const new_peeps = document.getElementById("people_list")
     let add_members = []
     for (chil of new_peeps.children) {
         add_members.push(chil.innerText)
     }
-    
-    
+    const event_data = {name:event_name, pic:event_pic, date1:event_date_1, date2:event_date_2, members:add_members}
+    localStorage.setItem(JSON.stringify(event_name), JSON.stringify(event_data))
+    console.log(localStorage.getItem(JSON.stringify(event_name)))
+    console.log(JSON.stringify(event_name))
+    localStorage.setItem("current_event",JSON.stringify(event_name))
+}
+
+document.querySelector("#event_new_btn").setAttribute("formaction","main.html")
+    document.querySelector("#main_pic").src = URL.createObjectURL(event_pic.files[0])
+    document.querySelector("#event_namen").textContent = event_name
+
+function current_user() {
+    console.log('hi!!')
+    const display_user = document.querySelector("#user_name")
+    const curr_use = localStorage.getItem("logged-in")
+    display_user.textContent = "User: "+curr_use
 }

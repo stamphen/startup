@@ -26,31 +26,31 @@
             <form method="get" action="main.html">
                 <div class="flexrow">
                     <label for="event_name">Event Name:</label>
-                    <input required type="text" id="event_name" />
+                    <input type="text" id="event_name" />
                 </div>
                 <br />
                 <div class="flexrow">
                     <label for="event_pic">Event Picture:</label>
-                    <input required type="file" id="event_pic" />
+                    <input type="file" id="event_pic" />
                 </div>
                 <br />
                 <div class="flexrow">
                     <label for="event_dates">Dates:</label>
-                    <input required type="date" id="event_dates1" />
+                    <input type="date" id="event_dates1" />
                 - 
-                    <input required type="date" id="event_dates2" />
+                    <input type="date" id="event_dates2" />
                 </div>
                 <br />
                 <div class="flexrow">
                     <label for="members">Members: (type someone's username and click add person. Repeat until all desired members have been added)</label>
                     <br />
-                    <input required type="text" id="members" />
+                    <input type="text" id="members" />
                     <button type="button" onclick="add_person()">Add Person</button>
                 </div>
                 <ul class="flexcolumn" id="people_list">
                 </ul>
                 <div class="flexrow">
-                    <button type="submit" onclick="new_event()">Create New Event</button>
+                    <button type="submit" onclick="new_event()" id="event_new_btn">Create New Event</button>
                 </div>
             </form>
 
