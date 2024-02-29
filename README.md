@@ -46,3 +46,13 @@ I finished applying CSS styles to my HTML web application. I think the website l
 - **Application elements**- I added padding and margins and flex so each element is clearly seen and looks good on the page. To have more control over this, I started by setting the default padding and margins to 0 for every element. I also worked on spacing so the login screen looks nicer, and the elements are closer together.
 - **Buttons/Links**- I did some special styling for buttons and links. Both of them will change to a different color when hovered over. This makes it clear to the user that clicking the button or link will do something. For the navigation links up top, I removed the underline and spaced them out evenly.
 - **Images**- I added a border to the event picture, so it stands out, and used grid styling for the pictures on the pics.html page. 
+
+## JavaScript Deliverable:
+- I have added JavaScript functionality to my startup web application.
+- **Login**- I added Local Storage functions to the login, so it won't let you login or proceed to the other pages on the website unless you have a valid username and password. You need to create an account first, then your credentials will be stored. Later I will store user's credentials in a database so they can sign in on multiple computers and at different times. I also made it so the Events tab will only show if you are logged in, and the same is true of the logout button. 
+- **WebSocket**- I added a JS function that regularly submits a comment, to imitate what it will be like when other users are submitting comments on their devices. It will update automatically on your device.
+- **Database**- I will store user's credentials, as well as the data for each event and the comments and pictures uploaded.
+- I created JavaScript functions that allow a user to upload comments and pictures, and have them immediately posted on the webpage.
+- I spent a lot of time trying to get the webpage to automatically display the user's name in the top right corner, but had a lot of trouble. I was especially trying `window.onload = important_function()` but it wasn't working, so I actually have not completed that part yet, but I will do so in the next couple of days.
+
+
