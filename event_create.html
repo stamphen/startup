@@ -23,7 +23,7 @@
         </header>
 
         <main>
-            <form method="get" action="main.html">
+            <form>
                 <div class="flexrow">
                     <label for="event_name">Event Name:</label>
                     <input type="text" id="event_name" />
@@ -50,7 +50,7 @@
                 <ul class="flexcolumn" id="people_list">
                 </ul>
                 <div class="flexrow">
-                    <button type="submit" onclick="new_event()" id="event_new_btn">Create New Event</button>
+                    <button onclick="new_event()" id="event_new_btn" formaction="main.html">Create New Event</button>
                 </div>
             </form>
 

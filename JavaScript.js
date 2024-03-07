@@ -5,6 +5,7 @@ window.addEventListener("DOMContentLoaded",logged_in_data());
 window.addEventListener("DOMContentLoaded",names());
 
 function logged_in_data() {
+    add_com()
     if ("logged-in" in localStorage) {
         const current_user = localStorage.getItem("logged-in");
         console.log("User","'",current_user,"'","Logged in!");
@@ -14,32 +15,32 @@ function logged_in_data() {
                 document.querySelector("#logout_btn").removeAttribute("hidden");
             } else {
                 throw new Error("problem!");
-            };
+            }
         } catch {
         setTimeout(() => {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").removeAttribute("hidden");
                 document.querySelector("#logout_btn").removeAttribute("hidden");
-            };
+            }
         }, 100);
-        };
+        }
     } else {
         console.log("Not logged in!");
         try {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").setAttribute("hidden",true);
                 document.querySelector("#logout_btn").setAttribute("hidden",true);
-            };
+            }
         } catch {
             setTimeout(() => {
                 if (document.querySelector("#logout_btn")) {
                     document.getElementById("hidden_nav1").setAttribute("hidden",true);
                     document.querySelector("#logout_btn").setAttribute("hidden",true);
-                };
+                }
             }, 100);
-        };
-    };
-};
+        }
+    }
+}
 
 function names() {
     setTimeout(() => {
@@ -47,21 +48,21 @@ function names() {
         } else {
             if ("logged-in" in localStorage) {
                 const user = localStorage.getItem("logged-in");
-                const nem = document.createTextNode(`User: ${user}`);
+                const nem = document.createTextNode(`${user}`);
                 try {
                     if (document.querySelector("#user_name")=null) {;
                         throw new Error("nullloo");
-                    };
+                    }
                 } catch {
                     setTimeout(() => {
                         const user_name = document.querySelector("#user_name");
                         user_name.appendChild(nem);
                     }, 100);
-                };
-            };
-        };
+                }
+            }
+        }
     }, 100);
-};
+}
 
 
 // Adding onload event listeners to main.html to replace data with current event data (will do same for pics.html)
@@ -69,25 +70,34 @@ if (document.querySelector("#main_pic")) {
     console.log("main is here!");
     const main_pic = document.querySelector("#main_pic");
     main_pic.addEventListener("DOMContentLoaded", ev_pc());
-};
+}
 
 function ev_pc() {
-    console.log("working");
-    console.log(localStorage);
     const event_pic = document.querySelector("#main_pic");
+    if (event_pic.dataset.changed) {
+        return;
+    }
+    event_pic.dataset.changed = true;
+
+    
     const event = localStorage.getItem("current_event");
-    console.log(event);
     const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)));
-    console.log(event_data);
-    console.log("success!!!");
-    console.log(event_data.pic);
-    new_url = URL.createObjectURL(event_data.pic);
-    console.log(new_url);
+    console.log(event_data)
+    
+    const tru = event_data.pic
+    console.log(tru,typeof(tru))
+    const yu = new File([event_data.pic],"filename")
+    console.log(yu)
+    //new_ur = URL.createObjectURL(event_data.pic);
+    //console.log(new_ur)
+    new_url = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.H4SF9uJKJbNRYqnN37t9UAHaE8%26pid%3DApi&f=1&ipt=f1f906cb2c17b3dcdbe62a0ff646a467c6f46c7db0c24b4b7312fbe793a1fbbc&ipo=images"
+    console.log(new_url,typeof(new_url))
+    
     event_pic.src = new_url;
-};
+}
     
 
-// This function will only be called in the console to help with debugging
+// This function will only be called in the web console to help with debugging
 function clear() {
     localStorage.clear()
 }
@@ -110,7 +120,7 @@ function comment() {
     const old_comments = document.getElementById("comments_old");
     old_comments.appendChild(nw_cmnt);
     old_comments.appendChild(document.createElement('hr'));
-};
+}
 
 function submit_pic() {
     const new_pic = document.getElementById("picture");
@@ -126,8 +136,9 @@ function submit_pic() {
     const span_txt = document.createTextNode("-"+user_name.innerText);
     pic_name.appendChild(span_txt);
     const pic_url = URL.createObjectURL(new_pic.files[0]);
-    pic_img.src = pic_url;  
-};
+    pic_img.src = pic_url;
+    console.log(pic_url,new_pic.files[0])
+}
 
 
 // Login functions
@@ -135,7 +146,7 @@ function login() {
     const btn = document.getElementById("login_btn");
     if (btn.hasAttribute("formaction")) {
         btn.removeAttribute("formaction");
-    };
+    }
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
     if (username in localStorage) {
@@ -146,18 +157,18 @@ function login() {
         } else {
             console.log("Incorrect Credentials!");
             alert("Incorrect Credentials!");
-        };
+        }
     } else {
         console.log("Username not Found!");
         alert("Username not Found!");
-    };
-};
+    }
+}
 
 function create_account() {
     const btn = document.getElementById("create_btn");
     if (btn.hasAttribute("formaction")) {
         btn.removeAttribute("formaction");
-    };
+    }
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
     if (username in localStorage) {
@@ -170,8 +181,8 @@ function create_account() {
         const logout_btn = document.getElementById("logout_btn");
         logout_btn.setAttribute("hidden", false);
         btn.setAttribute("formaction", "events.html");
-    };
-};
+    }
+}
 
 function logout() {
     localStorage.removeItem("logged-in");
@@ -179,63 +190,40 @@ function logout() {
 
 
 // Create Event functions
-function add_person() {
+function add_person() { 
     const new_perp = document.getElementById("members").value;
     const perp_list = document.getElementById("people_list");
     let varia = false;
     console.log(perp_list.children);
     if (new_perp in localStorage) {
-        console.log(perp_list);
-        if (perp_list.children.length >0) {
-            console.log("long")
-            for (per in perp_list.children) {
-                console.log("here")
-                console.log(perp_list.children)
-                console.log(per)
-                console.log(per.textContent)
-                console.log(per.innerText)
-            }
-            for (perp in perp_list.children) {
-                console.log(perp.value);
-                console.log(new_perp);
-                if (perp.textContent = new_perp) {
-                    console.log("Person already added!");
-                    varia = true;
-                };
-            };
-        } else {
-            console.log("short");
-        };
-        if (varia !== true) {
-            console.log("Person Successfully Added!");
-            const new_person = document.createElement("li");
-            const person_text = document.createTextNode(new_perp);
-            new_person.appendChild(person_text);
-            perp_list.appendChild(new_person);
-        };
+        console.log("Person Successfully Added!");
+        const new_person = document.createElement("li");
+        const person_text = document.createTextNode(new_perp);
+        new_person.appendChild(person_text);
+        perp_list.appendChild(new_person);
+        document.querySelector('#members').value = ""
     } else {
         console.log("No person with this username!");
         alert('No person with this username!');
-    };
-};
+    }
+}
 
 function new_event() {
-    console.log("new_event_happening");
     const event_name = document.getElementById("event_name").value;
     const event_pic = document.getElementById("event_pic").value;
-    const event_date_1 = document.getElementById("event_dates_1");
-    const event_date_2 = document.getElementById("event_dates_2");
+    const event_date_1 = document.getElementById("event_dates1").value;
+    const event_date_2 = document.getElementById("event_dates2").value;
     const new_peeps = document.getElementById("people_list");
     let add_members = [];
     for (chil of new_peeps.children) {
         add_members.push(chil.innerText);
-    };
-    const event_data = {name:event_name, pic:event_pic, date1:event_date_1, date2:event_date_2, members:add_members};
+    }
+    const event_data = {name:event_name, pic:event_pic, date1:event_date_1, date2:event_date_2, members:add_members}
     localStorage.setItem(JSON.stringify(event_name), JSON.stringify(event_data));
-    console.log(localStorage.getItem(JSON.stringify(event_name)));
-    console.log(JSON.stringify(event_name));
-    localStorage.setItem("current_event",event_name);
-};
+    localStorage.setItem("current_event", JSON.stringify(event_name))
+    console.log("New Event Created:",JSON.stringify(event_name));
+}
+
 
     //document.querySelector("#event_new_btn").setAttribute("formaction","main.html")
     //document.querySelector("#main_pic").src = URL.createObjectURL(event_pic.files[0])
@@ -250,12 +238,38 @@ function current_user() {
 }
 
 
-let chat = 'I loved that part of the vacation!! Honestly, we should totally do something again soon!';
-setInterval(() => {
-    chat = `${chat} plus the steak was glorious...`;
-    if (document.querySelector("#new_comment")) {
-        document.querySelector('#new_comment').textContent = chat;
-        comment();
-    };
-}, 10000);
+// Add a JavaScript function that imitates future WebSocket content
 
+function add_com() {
+    let chat = 'I loved that part of the vacation!! Honestly, we should totally do something again soon!';
+    setInterval(() => {
+        chat = `${chat} plus the steak was glorious...`;
+        if (document.querySelector("#new_comment")) {
+            const prev_inp = document.querySelector('#new_comment').value;
+            document.querySelector('#new_comment').value = chat;
+            comment();
+            document.querySelector('#new_comment').value = prev_inp;
+        }
+    }, 5000);
+}
+
+
+// Potential files for WebSocket pics.html
+function never_use() {
+    let list = new DataTransfer();
+    let file = new File([0], "C:\\Users\\adamj\\Pictures\\120757.png");
+    list.items.add(file);
+    let camera = list.files;
+    if (document.querySelector("#picture")) {
+        console.log(document.querySelector("#picture").value);
+        const prev_file = document.querySelector("#picture").value;
+        console.log(prev_file);
+        console.log(camera)
+        document.querySelector("#picture").value = "C:\\Users\\adamj\\Pictures\\120757.png"
+        console.log(camera)
+        setTimeout(() => {
+            submit_pic()
+        }, 2000);
+        document.querySelector("#picture").files = prev_file
+    }
+}
