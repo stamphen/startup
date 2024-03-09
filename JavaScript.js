@@ -1,6 +1,5 @@
 
 // Adding onload event listeners to check if a user is logged in, and display data
-
 window.addEventListener("DOMContentLoaded",logged_in_data());
 window.addEventListener("DOMContentLoaded",names());
 
@@ -65,20 +64,13 @@ function names() {
 }
 
 
-// Adding onload event listeners to main.html to replace data with current event data (will do same for pics.html)
-if (document.querySelector("#main_pic")) {
-    console.log("main is here!");
-    const main_pic = document.querySelector("#main_pic");
-    main_pic.addEventListener("DOMContentLoaded", ev_pc());
-}
-
+// Function called to change main/pics subheader
 function ev_pc() {
     const event_pic = document.querySelector("#main_pic");
     if (event_pic.dataset.changed) {
         return;
     }
     event_pic.dataset.changed = true;
-
     
     const event = localStorage.getItem("current_event");
     const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)));
@@ -88,8 +80,8 @@ function ev_pc() {
     console.log(tru,typeof(tru))
     const yu = new File([event_data.pic],"filename")
     console.log(yu)
-    //new_ur = URL.createObjectURL(event_data.pic);
-    //console.log(new_ur)
+    new_ur = URL.createObjectURL(yu);
+    console.log(new_ur)
     new_url = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.H4SF9uJKJbNRYqnN37t9UAHaE8%26pid%3DApi&f=1&ipt=f1f906cb2c17b3dcdbe62a0ff646a467c6f46c7db0c24b4b7312fbe793a1fbbc&ipo=images"
     console.log(new_url,typeof(new_url))
     
@@ -137,7 +129,7 @@ function submit_pic() {
     pic_name.appendChild(span_txt);
     const pic_url = URL.createObjectURL(new_pic.files[0]);
     pic_img.src = pic_url;
-    console.log(pic_url,new_pic.files[0])
+    console.log(pic_url,new_pic.files[0]);
 }
 
 
@@ -225,21 +217,7 @@ function new_event() {
 }
 
 
-    //document.querySelector("#event_new_btn").setAttribute("formaction","main.html")
-    //document.querySelector("#main_pic").src = URL.createObjectURL(event_pic.files[0])
-    //document.querySelector("#event_namen").textContent = event_name
-
-
-function current_user() {
-    console.log('hi!!');
-    const display_user = document.querySelector("#user_name");
-    const curr_use = localStorage.getItem("logged-in");
-    display_user.textContent = "User: "+curr_use;
-}
-
-
 // Add a JavaScript function that imitates future WebSocket content
-
 function add_com() {
     let chat = 'I loved that part of the vacation!! Honestly, we should totally do something again soon!';
     setInterval(() => {
