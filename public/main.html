@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+        <script src="JavaScript.js"></script>
+        <title>The Family Journal</title>
+    </head>
+
+    <body class="flexcolumn">
+        <header class="flexrow">
+            <h1>The Family Journal</h1>
+            <span></span>
+            <nav>
+                <menu class="flexrow">
+                    <li class="flexrowcent"><a href="index.html" id="hidden_nav1">Login</a></li>
+                    <li class="flexrowcent"><a href="events.html" id="hidden_nav1">Events</a></li>
+                </menu>
+            </nav>
+            <h3><span id="user_name"></span></h3>
+            <hr />
+        </header>
+
+        <main>
+            <section id="event" class="flexrow">
+                <img id="main_pic" onload="ev_pc()" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Ffamily-beach-vacation-back-view-happy-tropical-34560379.jpg&f=1&nofb=1&ipt=6f01c3a9cd9a58dfb13f08c756d2118bbdb9086b5c0786e8e25bd71f85ff6e7e&ipo=images" />
+                <div id="info" class="flexcolumncent">
+                    <h2 class="big" id="event_namen" onload="ev_nm()">Florida Family Vacation!</h2>
+                    <h4>Date: July 14<sup>th</sup>-19<sup>th</sup>, 2017</h4>
+                    <a href="pics.html">Pictures</a>
+                </div>
+            </section>
+            <section id="comments">
+                <hr />
+                <div id="comments_old">
+                    <div>
+                        <p>
+                            One of my favorite parts about the vacation was the steak house we visiting our last night there. Do you guys remember that? Best steak I've had in my life, for sure! I also really loved taking a nap on the sand in the middle of the day. 
+                        <br />
+                            <span>-Dad</span>
+                        </p>
+                    </div>
+                    <hr />
+                    <div id="divEl">
+                        <p>
+                            Dad, I totally agree, the steak house was marvelous. I loved swimming in the green water. I don't think any of you guys saw, but there was a big barrel or something underneath the water a few hundred feet out. I got some goggles and dove down. Wish I'd had a camera though.
+                        <br />
+                            <span>-Thomas</span>
+                        </p>
+                    </div>
+                    <hr />
+                </div>
+                <div id="comments_input">
+                    <form method="get" action="main.html">
+                        <div id="top" class="flexrow">
+                            <label for="comment">Reply:</label>
+                            <textarea placeholder="Your Comment Here" id="new_comment" rows="4" cols="60"></textarea>
+                            <button id="tall" type="button" onclick="comment()">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <hr />
+        </main>
+
+        <footer class="flexcolumn">
+            <span>Author: Adam Johnson</span>
+            <a href="https://github.com/stamphen/startup.git">My GitHub Repository</a>
+        </footer>
+    </body>
+</html>

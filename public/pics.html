@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+        <script src="JavaScript.js"></script>
+        <title>The Family Journal</title>
+    </head>
+
+    <body class="flexcolumn">
+        <header class="flexrow">
+            <h1>The Family Journal</h1>
+            <span></span>
+            <nav>
+                <menu class="flexrow">
+                    <li class="flexrowcent"><a href="index.html" id="hidden_nav1">Login</a></li>
+                    <li class="flexrowcent"><a href="events.html" id="hidden_nav1">Events</a></li>
+                </menu>
+            </nav>
+            <h3><span id="user_name"></span></h3>
+            <hr />
+        </header>
+
+        <main>
+            <section id="event" class="flexrow">
+                <img id="main_pic" onload="ev_pc()" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.dreamstime.com%2Fb%2Ffamily-beach-vacation-back-view-happy-tropical-34560379.jpg&f=1&nofb=1&ipt=6f01c3a9cd9a58dfb13f08c756d2118bbdb9086b5c0786e8e25bd71f85ff6e7e&ipo=images" />
+                <div id="info" class="flexcolumncent">
+                    <h2 class="big">Florida Family Vacation!</h2>
+                    <h4>Date: July 14<sup>th</sup>-19<sup>th</sup>, 2017</h4>
+                    <a href="main.html">Main Page</a>
+                </div>
+            </section>
+            <hr />
+            <section id="pictures_old">
+                <div class="flexcolumncent">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5k2aJP1pAabidMSYtzMXNwHaEx%26pid%3DApi&f=1&ipt=cd9720bb9a3f2a8ceb354793d9827d471004edfb930915ef01668d5c1e00eb02&ipo=images" />
+                    <span>-Dad</span>
+                </div>
+                <div class="flexcolumncent">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Z0LGJZbwtGw9vnEVmOnQJAHaE7%26pid%3DApi&f=1&ipt=ac409432e336b539aff6a2df85804509ce9a1f9aff35de4dc125a3ab7cd43d1b&ipo=images" />
+                    <span>-Mom</span>
+                </div>
+                <div class="flexcolumncent">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.XgqwB0FTC_K88QfeBOaDHwHaE8%26pid%3DApi&f=1&ipt=a9bc9bc6cede1603d841b0300ecc5c181c1b060c92d6555dfc2cab84e1df4440&ipo=images" />
+                    <span>-Thomas</span>    
+                </div>
+                <div class="flexcolumncent">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.H4SF9uJKJbNRYqnN37t9UAHaE8%26pid%3DApi&f=1&ipt=f1f906cb2c17b3dcdbe62a0ff646a467c6f46c7db0c24b4b7312fbe793a1fbbc&ipo=images" />
+                    <span>-Kenzie</span>
+                </div>
+                
+            </section>
+            <section id="pictures_input">
+                <hr />
+                <form method="get" action="pics.html">
+                    <div class="flexrow">
+                        <label for="picture">Upload your own photos:</label>
+                        <input required type="file" id="picture" />
+                        <button type="button" onclick="submit_pic()">Submit Picture</button>
+                    </div>
+                </form>
+
+            </section>
+            <hr />
+        </main>
+
+        <footer class="flexcolumn">
+            <span>Author: Adam Johnson</span>
+            <a href="https://github.com/stamphen/startup.git">My GitHub Repository</a>
+        </footer>
+    </body>
+</html>

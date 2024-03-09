@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+        <script src="JavaScript.js"></script>
+        <title>The Family Journal</title>
+    </head>
+
+    <body class="flexcolumn">
+        <header class="flexrow">
+            <h1>The Family Journal</h1>
+            <span></span>
+            <nav>
+                <menu class="flexrow">
+                    <li class="flexrowcent"><a href="index.html" id="hidden_nav1">Login</a></li>
+                    <li class="flexrowcent"><a href="events.html" id="hidden_nav1">Events</a></li>
+                </menu>
+            </nav>
+            <h3><span id="user_name"></span></h3>
+            <hr />
+        </header>
+
+        <main>
+            <form>
+                <div class="flexrow">
+                    <label for="event_name">Event Name:</label>
+                    <input type="text" id="event_name" />
+                </div>
+                <br />
+                <div class="flexrow">
+                    <label for="event_pic">Event Picture:</label>
+                    <input type="file" id="event_pic" />
+                </div>
+                <br />
+                <div class="flexrow">
+                    <label for="event_dates">Dates:</label>
+                    <input type="date" id="event_dates1" />
+                - 
+                    <input type="date" id="event_dates2" />
+                </div>
+                <br />
+                <div class="flexrow">
+                    <label for="members">Members: (type someone's username and click add person. Repeat until all desired members have been added)</label>
+                    <br />
+                    <input type="text" id="members" />
+                    <button type="button" onclick="add_person()">Add Person</button>
+                </div>
+                <ul class="flexcolumn" id="people_list">
+                </ul>
+                <div class="flexrow">
+                    <button onclick="new_event()" id="event_new_btn" formaction="main.html">Create New Event</button>
+                </div>
+            </form>
+
+
+            <hr />
+        </main>
+
+        <footer class="flexcolumn">
+            <span>Author: Adam Johnson</span>
+            <a href="https://github.com/stamphen/startup.git">My GitHub Repository</a>
+        </footer>
+    </body>
+</html>
