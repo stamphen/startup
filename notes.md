@@ -147,5 +147,13 @@ main.appendChild(divElement);
 - You can also add classes to elements, so they're affected by CSS. For example: `main.classList.add("flexrowcent")`
 - Delete children of an element by using: `div.removeChild(div.firstChild)` (presumably you could also just type in the name or id of the child)
 - Using `div.innerHTML` you can replace whatever was contained in the div with whatever you want. This can potentially leave your website open to hackers though, so it should probably be minimized.
+- Can use `new Promise((resolve,reject) => {})` and `async function func_name() {}` to execute things asynchronously. So you can run the function alongside everything else running on the server.
 
 ## JavaScript Deliverable {}
+- Added functions to add comments and pictures on main.html and pics.html
+- Used LocalStorage to store name of the user and display it on the page
+- Used LocalStorage to check if a user is logged in, and hide or display the Events tab and the logout button
+- Used a `SetInterval` function to replicate WebSocket data coming from other users on the server.
+
+## Service Notes !!
+- Use to handle HTTP/HTTPS requests to your server, and provide responses. 
