@@ -71,7 +71,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - I just uploaded the HTML for the simon application to <url>https://simon.familyjournal.click</url>. I did this by running `./deployFiles.sh -k [key pair file] -h familyjournal.click -s simon`. The deployFiles.sh file essentially tells the console what to do. It deletes any previous simon files, then creates a new directory and copies all of the simon files. I also copied the deployFiles.sh file to my startup repository, so I can use it when I start uploading my own files. 
 - I was able to also upload my startup repository using essentially the same command: `./deployFiles.sh -k [key pair file] -h familyjournal.click -s startup`.  
 
-## HTML Notes />
+## <startup html="notes" />
 - Sync CSS stylesheet with `<link rel="stylesheet" type="text/css" href="styles.css" />`
 - Sync Javascript file with `<script src="java.js"></script>`
 (both only need to be in the `<head>` section, and you can change the file names)
@@ -91,7 +91,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - I need to store the person's name (username) so that I can automatically add it to each of their comments and image uploads. 
 - Everytime someone submits a comment or uploads an image or creates a new event, the comment and picture lists will update. 
 
-## CSS Notes ;
+## startup {notes:css;}
 - When specifying the width of a container, padding, margins, etc., you can use percentages. This could be really useful when displaying on different screen sizes. 
 - The parameters `max-width` and `max-height` can also be very useful with screen sizes. I'll probably use a fixed width/height, with a percentage max-width/max-height.
 - When specifying margins, padding, borders the order is top, right, bottom, left. 
@@ -107,7 +107,7 @@ to edit the file. I changed the :80 and [yourdomainnamehere] portions to my doma
 - I used @font-face to upload a font named Bentham to use throughout my website.
 - Used button:hover to change button color when hovered over. Also used a:hover to change the background color of links.
 
-## JavaScript Notes {}
+## startup.javascript(notes)
 - Very useful to use the `onclick` attribute of a button to run a Javascript function. 
 - Use `document.getElementById('chaser').innerHTML = 'new heading'` to change what the heading used to say. This could trigger off a pushed button. 
 - Arrays are like Python lists. Can use `.length` for array length, `.push('new info')` to add something to the array, and more. 
@@ -155,5 +155,26 @@ main.appendChild(divElement);
 - Used LocalStorage to check if a user is logged in, and hide or display the Events tab and the logout button
 - Used a `SetInterval` function to replicate WebSocket data coming from other users on the server.
 
-## Service Notes !!
-- Use to handle HTTP/HTTPS requests to your server, and provide responses. 
+## require('Service Notes')
+- Use to handle HTTP/HTTPS requests to your server, and provide responses.
+- Use `fetch` to make requests from a web server. This can be a public API (Application Programming Interface), a call to a web server you created, or eventually, a call to a database (to retrieve or upload information.)
+- Fetch calls are of the format: `fetch('https://fakeurl.com', {method:"POST"})`. The method object is optional, and I believe without the method specified it defaults to GET. 
+- Fetch always returns a Promise, so can use `async function func_name() {await fetch('url')}`, or `.then( (response) => {do_something} )`. Usually we want to call the `.json()` method on what fetch returns to let us deal with the data better.
+- Allow Node.js to serve up my code by running `npm init -y` and then `npm install express` in the console. We can then use a JavaScript file (index.js) to serve up the rest of our files. It should contain the following:
+```
+// Make sure express module is loaded
+const express = require('express')
+const app = express()
+
+// We put our web files in a folder name public, so this serves up our static files. use() is similar to POST, GET, etc., and you can also call post(), get(), delete().
+app.use(express.json()); 
+app.use(express.static('public'));
+
+// Find the port and serve up the web server (can also use a function or something else to change the port)
+port = 3000
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});
+```
+- To actually run the code, enter `node index.js` in the console, while in the right pwd. Then navigate to <url>http://localhost:3000</url>. Using https:// doesn't work.
+- I'm changing the `setInterval(() => {}, time)` function so that it will fetch a public joke API, and paste that text into the comment box. Eventually this will be realtime content from other users. 
