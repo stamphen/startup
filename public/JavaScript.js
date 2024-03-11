@@ -1,3 +1,28 @@
+async function testnode() {
+    fetch('https://api.chucknorris.io/jokes/random')
+        .then((response) => response.json())
+        .then((data) => {
+            const idv = document.querySelector('#useless')
+            const par = document.createElement('p')
+            par.textContent = data.value
+            idv.appendChild(par)
+            console.log(data.value)
+        })
+    fetch('https://api.chucknorris.io/jokes/categories')
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+        })
+    fetch(' https://the-trivia-api.com/v2/questions')
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            console.log(data.value)
+        })
+        
+    
+}
+
 
 // Adding onload event listeners to check if a user is logged in, and display data
 window.addEventListener("DOMContentLoaded",logged_in_data());
