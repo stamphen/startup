@@ -89,14 +89,36 @@ function ev_pc() {
 }
     
 
-// This function will only be called in the web console to help with debugging
+// These functions will only be called in the web console to help with debugging
 function clear() {
     localStorage.clear()
 }
-
+function del() {
+    fetch('/self/dl', {
+        method: 'DELETE'
+    })
+}
 
 // Event interaction functions
 function comment() {
+
+    // Create comment object
+    const new_comm = {
+        text: document.querySelector('#new_comment').value,
+        author: document.querySelector('#user_name').innerText
+    }
+    console.log(new_comm)
+    // POST comment object with fetch
+    fetch('/self/comment', {
+        method:'POST', 
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(new_comm)
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    
+    
+    // Create new element, get value of input, append elem to existing <div>
     const neww_commment = document.getElementById("new_comment");
     const nw_cmnt = document.createElement("div");    
     const parag = document.createElement("p");
@@ -114,7 +136,9 @@ function comment() {
     old_comments.appendChild(document.createElement('hr'));
 }
 
-function submit_pic() {
+function submit_pic(file=12345) {
+    
+    // Create new element, get value of img file, append elem to existing <div>
     const new_pic = document.getElementById("picture");
     const old_pics = document.getElementById("pictures_old");
     const pic_div = document.createElement("div");
@@ -127,9 +151,31 @@ function submit_pic() {
     const user_name = document.getElementById("user_name");
     const span_txt = document.createTextNode("-"+user_name.innerText);
     pic_name.appendChild(span_txt);
-    const pic_url = URL.createObjectURL(new_pic.files[0]);
+    
+    // Create new URL if file, otherwise don't
+    if (file != 12345) {
+        pic_url = file;
+    } else {
+        pic_file = new_pic.files[0];
+        pic_url = URL.createObjectURL(pic_file);
+    }
+
+    // Create picture object
+    const new_picc = {
+        url: pic_url,
+        author: user_name.innerText
+    }
+    
+    // POST picture object with fetch
+    fetch('/self/photograph', {
+        method:'POST', 
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(new_picc) 
+    })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    
     pic_img.src = pic_url;
-    console.log(pic_url,new_pic.files[0]);
 }
 
 
@@ -220,24 +266,46 @@ function new_event() {
 // Add a JavaScript function that imitates future WebSocket content
 async function add_com() {
     setInterval(async () => {
-        await fetch('https://randomuser.me/api/')
-            .then((response) => response.json())
-            .then((data) => {
-                let nemm = data.results[0].name;
-                numm = nemm.title + " " + nemm.first + " " + nemm.last;
-            });
-        await fetch('https://official-joke-api.appspot.com/random_joke')
-            .then((response) => response.json())
-            .then((data) => {
-                total = data.setup + " " + data.punchline;
-            });
         if (document.querySelector("#new_comment")) {
+            await fetch('https://randomuser.me/api/')
+                .then((response) => response.json())
+                .then((data) => {
+                    let nemm = data.results[0].name;
+                    numm = nemm.title + " " + nemm.first + " " + nemm.last;
+                });
+            await fetch('https://official-joke-api.appspot.com/random_joke')
+                .then((response) => response.json())
+                .then((data) => {
+                    total = data.setup + " " + data.punchline;
+                });
             const prev_inp = document.querySelector('#new_comment').value;
             const usr = document.querySelector('#user_name').textContent;
             document.querySelector('#new_comment').value = total;
             document.querySelector('#user_name').textContent = numm;
             comment();
             document.querySelector('#new_comment').value = prev_inp;
+            document.querySelector('#user_name').textContent = usr;
+        } else if (document.querySelector("#picture")) {
+            await fetch('https://randomuser.me/api/')
+                .then((response) => response.json())
+                .then((data) => {
+                    let nemm = data.results[0].name;
+                    numm = nemm.title + " " + nemm.first + " " + nemm.last;
+                });
+            await fetch('https://dog.ceo/api/breeds/image/random')
+                .then((response) => response.json())
+                .then((data) => {
+                    source = data.message
+                });
+            try {
+                prev_fil = document.querySelector('#picture').files[0];
+            } catch {}
+            const usr = document.querySelector('#user_name').textContent;
+            document.querySelector('#user_name').textContent = numm;
+            submit_pic(source);
+            try {
+                document.querySelector('#picture').files[0] = prev_fil;
+            } catch {}
             document.querySelector('#user_name').textContent = usr;
         }
     }, 5000);
@@ -263,3 +331,19 @@ function never_use() {
         document.querySelector("#picture").files = prev_file
     }
 }
+
+
+
+//useful
+//USEFUL
+
+//async function createFile(){
+//    let response = await fetch('http://127.0.0.1:8080/test.jpg');
+//    let data = await response.blob();
+//    let metadata = {
+//        type: 'image/jpeg'
+//    };
+//    let file = new File([data], "test.jpg", metadata);
+//    // ... do something with the file or return it
+//    }
+//createFile();

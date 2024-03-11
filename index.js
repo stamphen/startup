@@ -1,6 +1,8 @@
 // Make sure express is working
 const express = require("express");
+const cors = require("cors")
 const app = express();
+app.use(cors());
 
 // Bring up the web static files
 app.use(express.json());
@@ -11,7 +13,7 @@ var MagicMirror = express.Router();
 app.use(`/self`, MagicMirror);
 
 // Comments/Pictures fetch
-MagicMirror.get('/comments', (_req,res) => {
+MagicMirror.get('/comments', (req,res) => {
     res.send(comments);
 })
 
@@ -28,7 +30,10 @@ MagicMirror.post('/photograph', (req,res) => {
     pictures.push(req.body);
     res.send(pictures);
 })
-
+MagicMirror.delete('/dl', (_req,_res) => {
+    comments = []
+    pictures = []
+})
 
 
 // Find the port and serve up the web server

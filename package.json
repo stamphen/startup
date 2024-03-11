@@ -1,12 +1,12 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.3"
   },
   "name": "startup",
   "description": "[Link to notes.md](notes.md)",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
