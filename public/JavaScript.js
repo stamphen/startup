@@ -134,6 +134,8 @@ function comment(comm=12,aut=14,rep="ut") {
         author: aut_val
     }
 
+    // Find if the function was called from page loading. If so,
+    // do not submit post requests
     if (rep!="repeated") {
         // POST comment object with fetch
         fetch('/self/comment', {
@@ -147,7 +149,6 @@ function comment(comm=12,aut=14,rep="ut") {
 }
 
 function main_comments() {
-    console.log('working')
     fetch('/self/comments')
         .then((response) => response.json())
         .then((data) => {
@@ -157,8 +158,7 @@ function main_comments() {
         });        
 }
 
-
-function submit_pic(file=12345,aut=15) {
+function submit_pic(file=12345,aut=15,rep="ut") {
     
     // Create new element, get value of img file, append elem to existing <div>
     const new_pic = document.getElementById("picture");
@@ -171,8 +171,6 @@ function submit_pic(file=12345,aut=15) {
     pic_div.appendChild(pic_name);
     pic_div.classList.add("flexcolumncent");
     const user_name = document.getElementById("user_name");
-    const span_txt = document.createTextNode("-"+user_name.innerText);
-    pic_name.appendChild(span_txt);
     
     // Create new URL if file, otherwise don't
     if (file != 12345) {
@@ -182,22 +180,46 @@ function submit_pic(file=12345,aut=15) {
         pic_url = URL.createObjectURL(pic_file);
     }
 
+    // If called with parameters
+    if (file!=12345 && aut!=15) {
+        urlpic = file;
+        autpic = aut;
+    } else {
+        urlpic = pic_url
+        autpic = user_name.innerText
+    }
+
     // Create picture object
     const new_picc = {
-        url: pic_url,
-        author: user_name.innerText
+        url: urlpic,
+        author: autpic
     }
     
-    // POST picture object with fetch
-    fetch('/self/photograph', {
-        method:'POST', 
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify(new_picc) 
-    })
+    // If called by main_photography(), don't POST
+    if (rep!="repeated") {
+        // POST picture object with fetch
+        fetch('/self/photograph', {
+            method:'POST', 
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(new_picc) 
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+    }
+
+    const span_txt = document.createTextNode("-"+autpic);
+    pic_name.appendChild(span_txt);
+    pic_img.src = urlpic;
+}
+
+function main_photography() {
+    fetch('/self/pictures')
         .then((response) => response.json())
-        .then((data) => console.log(data))
-    
-    pic_img.src = pic_url;
+        .then((data) => {
+            for (let i=0; i<data.length; i++) {
+                submit_pic(data[i]['url'], data[i]['author'], "repeated");
+            }
+        });       
 }
 
 
