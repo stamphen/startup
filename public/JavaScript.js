@@ -1,10 +1,13 @@
-
 // Adding onload event listeners to check if a user is logged in, and display data
-window.addEventListener("DOMContentLoaded",logged_in_data());
-window.addEventListener("DOMContentLoaded",names());
+window.addEventListener("load",logged_in_data());
+window.addEventListener("load",names());
 
 function logged_in_data() {
-    add_com()
+    
+    // Runs the WebSocket-imitating function
+    web_sock()
+
+    // Displays Event tab and Logout btn
     if ("logged-in" in localStorage) {
         const current_user = localStorage.getItem("logged-in");
         console.log("User","'",current_user,"'","Logged in!");
@@ -23,6 +26,8 @@ function logged_in_data() {
             }
         }, 100);
         }
+
+    // Hides Events tab and Logout btn
     } else {
         console.log("Not logged in!");
         try {
@@ -40,7 +45,6 @@ function logged_in_data() {
         }
     }
 }
-
 function names() {
     setTimeout(() => {
         if (document.querySelector("#login_btn")) {
@@ -98,6 +102,7 @@ function del() {
     })
 }
 
+
 // Event interaction functions
 function comment(comm=12,aut=14,rep="ut") {
     
@@ -147,7 +152,6 @@ function comment(comm=12,aut=14,rep="ut") {
             .then((data) => console.log(data))
     }   
 }
-
 function main_comments() {
     fetch('/self/comments')
         .then((response) => response.json())
@@ -157,7 +161,6 @@ function main_comments() {
             }
         });        
 }
-
 function submit_pic(file=12345,aut=15,rep="ut") {
     
     // Create new element, get value of img file, append elem to existing <div>
@@ -211,7 +214,6 @@ function submit_pic(file=12345,aut=15,rep="ut") {
     pic_name.appendChild(span_txt);
     pic_img.src = urlpic;
 }
-
 function main_photography() {
     fetch('/self/pictures')
         .then((response) => response.json())
@@ -245,7 +247,6 @@ function login() {
         alert("Username not Found!");
     }
 }
-
 function create_account() {
     const btn = document.getElementById("create_btn");
     if (btn.hasAttribute("formaction")) {
@@ -265,7 +266,6 @@ function create_account() {
         btn.setAttribute("formaction", "events.html");
     }
 }
-
 function logout() {
     localStorage.removeItem("logged-in");
 }
@@ -289,7 +289,6 @@ function add_person() {
         alert('No person with this username!');
     }
 }
-
 function new_event() {
     const event_name = document.getElementById("event_name").value;
     const event_pic = document.getElementById("event_pic").value;
@@ -308,7 +307,7 @@ function new_event() {
 
 
 // Add a JavaScript function that imitates future WebSocket content
-async function add_com() {
+async function web_sock() {
     setInterval(async () => {
         if (document.querySelector("#new_comment")) {
             await fetch('https://randomuser.me/api/')
