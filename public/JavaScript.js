@@ -1,15 +1,17 @@
 // Adding onload event listeners to check if a user is logged in, and display data
-window.addEventListener("load",logged_in_data());
+window.addEventListener("DOMContentLoaded",logged_in_data());
 
 async function logged_in_data() {
     
     // Runs the WebSocket-imitating function
     web_sock()
-
+    console.log('log')
     // Displays Event tab and Logout btn
-    try {
-        const loged = await fetch('/self/uz');      // Fetch current user
-        gedin = await loged.json();
+    const loged = await fetch('/self/uz');      // Fetch current user
+    gedin = await loged.json();
+    console.log("current_user == ",gedin)
+    if (gedin != false) {
+        // Display logout btn and events tab
         try {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").removeAttribute("hidden");
@@ -24,14 +26,17 @@ async function logged_in_data() {
                 document.querySelector("#logout_btn").removeAttribute("hidden");
             }
         }, 50);
-        console.log("user data: ",gedin)
+        }
+    } else {
+        
+        // Move back to login if ever logged out
+        console.log("Not logged in!");
+        if (document.querySelector('#login_btn')) {
+        } else {
+            window.location.href = "index.html";
         }
 
-    // Hide logout btn and events tab
-    } catch {
-        console.log("Not logged in!");
-
-
+        // Hide logout btn and events tab
         try {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").setAttribute("hidden",true);
@@ -100,18 +105,18 @@ function ev_pc() {
 function main_header() {
     
 }
-async function event_list() {
+function event_list() {
     console.log('kinda work')
     try {
         console.log('in')
-        await fetch('/self/listEv')
-            .then((response) => console.log(response))
+        fetch('/self/listEv')
+            .then((response) => response.json())
             .then((data) => {
                 console.log('inside')
-                console.log(data)
+                console.log("events: ",data)
             })
     } catch {
-        console.log('nope')
+        console.log('event_list fetch failed')
     }
 }
 
@@ -270,10 +275,7 @@ function login() {
         .then((data) => {
             if (data == true) {
                 console.log("Login Success!");
-                localStorage.setItem("logged-in",username)
-                //btn.setAttribute("formaction", "events.html");
-                //btn.click()
-                window.location.href = "events.html"
+                window.location.href = "events.html";
             } else {
                 console.log("Incorrect Credentials!");
                 alert("Incorrect Credentials!");
@@ -303,9 +305,7 @@ function create_account() {
             console.log(data)
             if (data != false) {
                 console.log("Thanks for creating an account, ",username);
-                localStorage.setItem("logged-in",username);
-                btn.setAttribute("formaction", "events.html");
-                btn.click();
+                window.location.href = "events.html";
             } else {
                 console.log("Account already exists!");
                 alert("Account already exists!");

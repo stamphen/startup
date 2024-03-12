@@ -52,15 +52,19 @@ MagicMirror.get('/switchEv', (req,_res) => {        // switch to a different eve
     current_user.current_event = difEv;
 });
 MagicMirror.get('/listEv', (_req,res) => {          // return current user's events
-    if (current_user.events) {
-        res.send(current_user.events);
+                //try {
+                //    const evs = current_user.events;
+                //    res.send({"success!":"yes!"});
+                //    //res.send(evs);
+                //} catch {
+                //    const fal = "failure"
+                //    res.send({"failure":"yes"})
+                //}
+    if (current_user != undefined) {    
+        res.send({"success":"success"})
     } else {
-        res.send('failure!!')
+        res.send({"failure":"failure"});
     }
-    
-    //for (even in current_user.events) {
-    //    res.send(even.objectify());
-    //}
 });
 
 // Login fetch
@@ -93,7 +97,13 @@ MagicMirror.put('/logout', (_req,res) => {           // logout
     res.send(false);
 });
 MagicMirror.get('/uz', (_req,res) => {              // get current user
-    res.send(current_user.objectify());
+    console.log(current_user);
+    if (current_user != undefined) {
+        res.send(current_user);
+        //res.send(JSON.stringify(current_user.objectify()));
+    } else {
+        res.send(false)
+    }
 });
 MagicMirror.get('/all_uz', (_req,res) => {          // get all users
     res.send(users);
