@@ -72,19 +72,18 @@ function ev_pc() {
     }
     event_pic.dataset.changed = true;
     
-    const event = localStorage.getItem("current_event");
-    const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)));
-    console.log(event_data)
+    //const event = localStorage.getItem("current_event");
+    //const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)));
+    //console.log(event_data)
     
-    const tru = event_data.pic
-    console.log(tru,typeof(tru))
-    const yu = new File([event_data.pic],"filename")
-    console.log(yu)
-    new_ur = URL.createObjectURL(yu);
-    console.log(new_ur)
+    //const tru = event_data.pic
+    //console.log(tru,typeof(tru))
+    //const yu = new File([event_data.pic],"filename")
+    //console.log(yu)
+    //new_ur = URL.createObjectURL(yu);
+    //console.log(new_ur)
     new_url = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.H4SF9uJKJbNRYqnN37t9UAHaE8%26pid%3DApi&f=1&ipt=f1f906cb2c17b3dcdbe62a0ff646a467c6f46c7db0c24b4b7312fbe793a1fbbc&ipo=images"
     console.log(new_url,typeof(new_url))
-    
     event_pic.src = new_url;
 }
     
@@ -100,43 +99,66 @@ function del() {
 }
 
 // Event interaction functions
-function comment() {
-
-    // Create comment object
-    const new_comm = {
-        text: document.querySelector('#new_comment').value,
-        author: document.querySelector('#user_name').innerText
-    }
-    console.log(new_comm)
-    // POST comment object with fetch
-    fetch('/self/comment', {
-        method:'POST', 
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify(new_comm)
-    })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-    
+function comment(comm=12,aut=14,rep="ut") {
     
     // Create new element, get value of input, append elem to existing <div>
     const neww_commment = document.getElementById("new_comment");
     const nw_cmnt = document.createElement("div");    
     const parag = document.createElement("p");
     const name_span = document.createElement("span");
-    const comment_input = document.createTextNode(neww_commment.value);
-    parag.appendChild(comment_input);
     parag.append(document.createElement("br"));
     nw_cmnt.appendChild(parag);
     const user_name = document.getElementById("user_name");
-    const span_txt = document.createTextNode("-"+user_name.innerText);
-    name_span.appendChild(span_txt);
-    nw_cmnt.appendChild(name_span);
     const old_comments = document.getElementById("comments_old");
     old_comments.appendChild(nw_cmnt);
     old_comments.appendChild(document.createElement('hr'));
+
+    // Find if the function was called with parameters
+    if (comm!=12 && aut!=14) {
+        com_val = comm;
+        aut_val = aut;
+    } else {
+        com_val = neww_commment.value;
+        aut_val = user_name.innerText;
+    }
+
+    const comment_input = document.createTextNode(com_val);
+    parag.appendChild(comment_input);
+    const span_txt = document.createTextNode("-"+aut_val);
+    name_span.appendChild(span_txt);
+    nw_cmnt.appendChild(name_span);
+
+    // Create comment object
+    const new_comm = {
+        text: com_val,
+        author: aut_val
+    }
+
+    if (rep!="repeated") {
+        // POST comment object with fetch
+        fetch('/self/comment', {
+            method:'POST', 
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(new_comm)
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+    }   
 }
 
-function submit_pic(file=12345) {
+function main_comments() {
+    console.log('working')
+    fetch('/self/comments')
+        .then((response) => response.json())
+        .then((data) => {
+            for (let i=0; i<data.length; i++) {
+                comment(data[i]['text'], data[i]['author'], "repeated");
+            }
+        });        
+}
+
+
+function submit_pic(file=12345,aut=15) {
     
     // Create new element, get value of img file, append elem to existing <div>
     const new_pic = document.getElementById("picture");
@@ -308,7 +330,7 @@ async function add_com() {
             } catch {}
             document.querySelector('#user_name').textContent = usr;
         }
-    }, 5000);
+    }, 7500);
 }
 
 
