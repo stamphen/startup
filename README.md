@@ -55,4 +55,10 @@ I finished applying CSS styles to my HTML web application. I think the website l
 - I created JavaScript functions that allow a user to upload comments and pictures, and have them immediately posted on the webpage.
 - I spent a lot of time trying to get the webpage to automatically display the user's name in the top right corner, but had a lot of trouble. I was especially trying `window.onload = important_function()` but it wasn't working, so I actually have not completed that part yet, but I will do so in the next couple of days.
 
-
+## Service Deliverable:
+- I have successfully implemented a web server, used fetch requests, and deployed using Node.js. 
+- I replaced most of the LocalStorage I was previously using with storing data on the server (i.e. variables in my index.js file.) Once we add the database I will store everything there.
+- **NODE.JS/Express** - I successfully implemented node.js to deploy my server, including using express and listening on a web port. 
+- **Third Party Endpoints** - There isn't really a place for third-party endpoints in my web application. I'm not sure if they're required for the final product, I might need to find a place for them. For this deliverable I used fetch calls to third-party endpoints to bring in random jokes, pictures, and names. I used this data in my function that imitates future WebSocket data (regularly adding a comment or picture.)
+- **Backend Endpoints/Calling Backend Endpoints** - I created many backend endpoints by using an express Router. These include calls to receive information about login, comments, pictures, events, etc., or to post information about any of those. My frontend regularly calls the backend endpoints I created, through user input, buttons, pages loading, etc. All of these calls are made using fetch.
+- **Middleware** - All of my middleware is called directly using fetch from my frontend code. I do have two class definitions in my index.js file, though. 
