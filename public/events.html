@@ -8,7 +8,7 @@
         <title>The Family Journal</title>
     </head>
 
-    <body class="flexcolumn">
+    <body class="flexcolumn" onload="event_list()" >
         <header class="flexrow">
             <h1>The Family Journal</h1>
             <span></span>
@@ -25,10 +25,11 @@
         <main>
             <h3 class="big">Your Events:</h3>
             <hr />
-            <ul class="flexcolumn" onload="ev_list()" id="event_list_links">
+            <ul class="flexcolumn" id="event_list_links">
                 <li><a href="main.html">Florida Vacation</a></li>
                 <li><a href="main.html">California Redwoods Trip</a></li>
                 <li><a href="main.html">Arches National Park</a></li>
+                
             </ul>
             <form action="event_create.html">
                 <div class="flexrow">

@@ -1,16 +1,20 @@
 // Adding onload event listeners to check if a user is logged in, and display data
 window.addEventListener("load",logged_in_data());
-window.addEventListener("load",names());
+if (document.querySelector('#event_list_links')) {
+    window.addEventListener("load",event_list());
+}
 
-function logged_in_data() {
+async function logged_in_data() {
     
     // Runs the WebSocket-imitating function
     web_sock()
 
     // Displays Event tab and Logout btn
-    if ("logged-in" in localStorage) {
-        const current_user = localStorage.getItem("logged-in");
-        console.log("User","'",current_user,"'","Logged in!");
+    console.log("log running");
+    try {
+        const loged = await fetch('/self/uz');      // Fetch current user
+        gedin = await loged.json();
+        console.log(gedin)
         try {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").removeAttribute("hidden");
@@ -24,11 +28,12 @@ function logged_in_data() {
                 document.getElementById("hidden_nav1").removeAttribute("hidden");
                 document.querySelector("#logout_btn").removeAttribute("hidden");
             }
-        }, 100);
+        }, 50);
+        console.log(gedin)
         }
 
-    // Hides Events tab and Logout btn
-    } else {
+    // Hide logout btn and events tab
+    } catch {
         console.log("Not logged in!");
         try {
             if (document.querySelector("#logout_btn")) {
@@ -41,30 +46,40 @@ function logged_in_data() {
                     document.getElementById("hidden_nav1").setAttribute("hidden",true);
                     document.querySelector("#logout_btn").setAttribute("hidden",true);
                 }
-            }, 100);
+            }, 50);
         }
     }
-}
-function names() {
+
+    // If not on login page, display current user
     setTimeout(() => {
         if (document.querySelector("#login_btn")) {
         } else {
-            if ("logged-in" in localStorage) {
-                const user = localStorage.getItem("logged-in");
-                const nem = document.createTextNode(`${user}`);
-                try {
-                    if (document.querySelector("#user_name")=null) {;
-                        throw new Error("nullloo");
+            try {
+                if (gedin) {
+                    const user = gedin['username']
+                    const nem = document.createTextNode(`${user}`);
+                    try {
+                        if (document.querySelector("#user_name")=null) {
+                            throw new Error("nullloo");
+                        } else {
+                            const user_name = document.querySelector("#user_name");
+                            user_name.appendChild(nem);
+                        }
+                    } catch {
+                        setTimeout(() => {
+                            const user_name = document.querySelector("#user_name");
+                            user_name.appendChild(nem);
+                        }, 50);
                     }
-                } catch {
-                    setTimeout(() => {
-                        const user_name = document.querySelector("#user_name");
-                        user_name.appendChild(nem);
-                    }, 100);
                 }
-            }
+            } catch {}
         }
-    }, 100);
+    }, 50);
+
+    if (document.querySelector('#event_list_links')) {
+        console.log('yoooooooooooooooooooooo')
+        event_list();
+    }
 }
 
 
@@ -90,7 +105,20 @@ function ev_pc() {
     console.log(new_url,typeof(new_url))
     event_pic.src = new_url;
 }
+function main_header() {
     
+}
+function event_list() {
+    try {
+        fetch('/self/listEv')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+            })
+    } catch {
+        console.log('nope')
+    }
+}
 
 // These functions will only be called in the web console to help with debugging
 function clear() {
@@ -227,69 +255,107 @@ function main_photography() {
 
 // Login functions
 function login() {
+
+    // Get elems
     const btn = document.getElementById("login_btn");
     if (btn.hasAttribute("formaction")) {
         btn.removeAttribute("formaction");
     }
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
-    if (username in localStorage) {
-        if (localStorage.getItem(username) === pswrd) {
-            console.log("Login Success!");
-            localStorage.setItem("logged-in", username);
-            btn.setAttribute("formaction", "events.html");
-        } else {
-            console.log("Incorrect Credentials!");
-            alert("Incorrect Credentials!");
-        }
-    } else {
-        console.log("Username not Found!");
-        alert("Username not Found!");
-    }
+
+    // fetch get request 
+    try_user = {username: username, password: pswrd};
+    fetch('/self/login', {
+        method:'POST', 
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(try_user)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data == true) {
+                console.log("Login Success!");
+                localStorage.setItem("logged-in",username)
+                //btn.setAttribute("formaction", "events.html");
+                //btn.click()
+                window.location.href = "events.html"
+            } else {
+                console.log("Incorrect Credentials!");
+                alert("Incorrect Credentials!");
+            }
+        });
 }
 function create_account() {
+
+    // get elems
     const btn = document.getElementById("create_btn");
-    if (btn.hasAttribute("formaction")) {
+    if (btn.hasAttribute("formaction")) {  
         btn.removeAttribute("formaction");
     }
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
-    if (username in localStorage) {
-        console.log("Account already exists!");
-        alert("Account already exists!");
-    } else {
-        localStorage.setItem(username, pswrd);
-        console.log("Thanks for creating an account, ",username);
-        localStorage.setItem("logged-in",username);
-        const logout_btn = document.getElementById("logout_btn");
-        logout_btn.setAttribute("hidden", false);
-        btn.setAttribute("formaction", "events.html");
-    }
+
+    // get fetch
+    try_user = {username: username, password: pswrd};
+    console.log(JSON.stringify(try_user))
+    fetch('/self/account_new', {
+        method:'POST', 
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(try_user)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            if (data != false) {
+                console.log("Thanks for creating an account, ",username);
+                localStorage.setItem("logged-in",username);
+                btn.setAttribute("formaction", "events.html");
+                btn.click();
+            } else {
+                console.log("Account already exists!");
+                alert("Account already exists!");
+            }
+        });
 }
-function logout() {
-    localStorage.removeItem("logged-in");
+async function logout() {
+    await fetch('/self/logout', {
+        method: 'PUT'
+    })
 }
 
 
 // Create Event functions
-function add_person() { 
+async function add_person() { 
     const new_perp = document.getElementById("members").value;
     const perp_list = document.getElementById("people_list");
     let varia = false;
-    console.log(perp_list.children);
-    if (new_perp in localStorage) {
-        console.log("Person Successfully Added!");
-        const new_person = document.createElement("li");
-        const person_text = document.createTextNode(new_perp);
-        new_person.appendChild(person_text);
-        perp_list.appendChild(new_person);
-        document.querySelector('#members').value = ""
-    } else {
-        console.log("No person with this username!");
-        alert('No person with this username!');
-    }
+
+    // Fetch list of users
+    await fetch('/self/all_uz')
+        .then((response) => response.json())
+        .then((data) => {
+            found = false;
+            for (let i=0;i<data.length;i++) {
+                if (data[i]['username'] == new_perp) {
+                    found = true;
+                }
+            }
+            if (found == true) {
+                console.log("Person Successfully Added!");
+                const new_person = document.createElement("li");
+                const person_text = document.createTextNode(new_perp);
+                new_person.appendChild(person_text);
+                perp_list.appendChild(new_person);
+                document.querySelector('#members').value = ""
+            } else {
+                console.log("No person with this username!");
+                alert('No person with this username!');
+            }
+            })
 }
-function new_event() {
+async function new_event() {
+    
+    // Find input elems
     const event_name = document.getElementById("event_name").value;
     const event_pic = document.getElementById("event_pic").value;
     const event_date_1 = document.getElementById("event_dates1").value;
@@ -299,10 +365,15 @@ function new_event() {
     for (chil of new_peeps.children) {
         add_members.push(chil.innerText);
     }
-    const event_data = {name:event_name, pic:event_pic, date1:event_date_1, date2:event_date_2, members:add_members}
-    localStorage.setItem(JSON.stringify(event_name), JSON.stringify(event_data));
-    localStorage.setItem("current_event", JSON.stringify(event_name))
-    console.log("New Event Created:",JSON.stringify(event_name));
+    const event_data = {name:event_name, url:event_pic, d1:event_date_1, d2:event_date_2, members:add_members}
+    
+    // Send a post request to create a new event
+    await fetch('/self/newEv', {
+        method: 'POST',
+        body: event_data
+    });
+
+    console.log("New Event Created:",JSON.stringify(event_name));    
 }
 
 
@@ -355,6 +426,8 @@ async function web_sock() {
 }
 
 
+
+////////////////////////////////
 // Potential files for WebSocket pics.html
 function never_use() {
     let list = new DataTransfer();
@@ -374,19 +447,13 @@ function never_use() {
         document.querySelector("#picture").files = prev_file
     }
 }
-
-
-
-//useful
-//USEFUL
-
-//async function createFile(){
-//    let response = await fetch('http://127.0.0.1:8080/test.jpg');
-//    let data = await response.blob();
-//    let metadata = {
-//        type: 'image/jpeg'
-//    };
-//    let file = new File([data], "test.jpg", metadata);
-//    // ... do something with the file or return it
-//    }
-//createFile();
+// Maybe helpful for storing image files
+async function createFile(){
+    let response = await fetch('http://127.0.0.1:8080/test.jpg');
+    let data = await response.blob();
+    let metadata = {
+        type: 'image/jpeg'
+    };
+    let file = new File([data], "test.jpg", metadata);
+    // ... do something with the file or return it
+}

@@ -40,7 +40,7 @@ MagicMirror.get('/currEv', (_req,res) => {          // return current event
     res.send(current_user.current_event);
 });
 MagicMirror.post('/newEv', (req,res) => {           // post new event
-    const newEv = new Event(req.body.name,req.body.url,req.body.d1,req.body.d2);
+    const newEv = new Event(req.body['name'],req.body['url'],req.body['d1'],req.body['d2'],req.body['members']);
     newEv.addEv();
     res.send(current_user.current_event);
 });
@@ -51,15 +51,31 @@ MagicMirror.get('/switchEv', (req,_res) => {        // switch to a different eve
     difEv = req.body;
     current_user.current_event = difEv;
 });
+MagicMirror.get('/listEv', (_req,res) => {          // return current user's events
+    for (even in current_user.events) {
+        res.send(even.objectify());
+    }
+});
 
 // Login fetch
-MagicMirror.post('/account_new', (req,_res) => {    // create new account
-    const perp = new User(req.body.username, req.body.password);
-    perp.addUz();
+MagicMirror.post('/account_new', (req,res) => {    // create new account
+    const perp = new User(req.body['username'], req.body['password']);
+    if (perp in users) {
+        res.send(false);
+    } else {
+        perp.addUz();
+        res.send(true);
+    }
 });
-MagicMirror.get('/login', (req,res) => {            // login to existing account
-    const try_user = req.body;
-    if (try_user in users) {
+MagicMirror.post('/login', (req,res) => {            // login to existing account
+    const try_user = new User(req.body[0],req.body[1]);
+    same = false;
+    for (user in users) {
+        if (JSON.stringify(user.name) = JSON.stringify(try_user.name)) {
+            same = true;
+        }
+    }
+    if (same = true) {
         current_user = try_user;
         res.send(true);
     } else {
@@ -70,18 +86,17 @@ MagicMirror.put('/logout', (_req,res) => {           // logout
     current_user = null;
     res.send(false);
 });
-
-
-// Find the port and serve up the web server
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+MagicMirror.get('/uz', (_req,res) => {              // get current user
+    res.send(current_user.objectify());
 });
+MagicMirror.get('/all_uz', (_req,res) => {          // get all users
+    res.send(users);
+})
 
 
 // Variables in which to store data
-let current_user = null
 let users = [];
+let current_user = undefined;
 
 
 // Classes
@@ -90,28 +105,38 @@ class User {
         this.username = username;
         this.password = password;
         this.events = [];
-        this.current_event = null;
     }
     addUz() {
         current_user = this;
         users.push(this);
     }
+    objectify() {
+        return {username:this.username,password:this.password,events:this.events}
+    }
 }
 class Event {
-    constructor(name, url, date1, date2) {
+    constructor(name, url, date1, date2, members) {
         this.name = name;
         this.url = url;
         this.date1 = date1;
         this.date2 = date2;
+        this.members = members;
         this.comments = [];
         this.pictures = [];
     }
     addEv() {
         current_user.events.push(this);
         current_user.current_event = this;
+        return
     }
-    delEv() {
-        current_user.events.remove(this);
-        current_user.current_event = null;
+    objectify() {
+        return {name:this.name,url:this.url,d1:this.date1,d2:this.date2,members:this.members,comments:this.comments,pictures:this.pictures}
     }
 }
+
+
+// Find the port and serve up the web server
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+});
