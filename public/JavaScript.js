@@ -1,8 +1,5 @@
 // Adding onload event listeners to check if a user is logged in, and display data
 window.addEventListener("load",logged_in_data());
-if (document.querySelector('#event_list_links')) {
-    window.addEventListener("load",event_list());
-}
 
 async function logged_in_data() {
     
@@ -10,11 +7,9 @@ async function logged_in_data() {
     web_sock()
 
     // Displays Event tab and Logout btn
-    console.log("log running");
     try {
         const loged = await fetch('/self/uz');      // Fetch current user
         gedin = await loged.json();
-        console.log(gedin)
         try {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").removeAttribute("hidden");
@@ -29,12 +24,14 @@ async function logged_in_data() {
                 document.querySelector("#logout_btn").removeAttribute("hidden");
             }
         }, 50);
-        console.log(gedin)
+        console.log("user data: ",gedin)
         }
 
     // Hide logout btn and events tab
     } catch {
         console.log("Not logged in!");
+
+
         try {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").setAttribute("hidden",true);
@@ -75,11 +72,6 @@ async function logged_in_data() {
             } catch {}
         }
     }, 50);
-
-    if (document.querySelector('#event_list_links')) {
-        console.log('yoooooooooooooooooooooo')
-        event_list();
-    }
 }
 
 
@@ -108,11 +100,14 @@ function ev_pc() {
 function main_header() {
     
 }
-function event_list() {
+async function event_list() {
+    console.log('kinda work')
     try {
-        fetch('/self/listEv')
-            .then((response) => response.json())
+        console.log('in')
+        await fetch('/self/listEv')
+            .then((response) => console.log(response))
             .then((data) => {
+                console.log('inside')
                 console.log(data)
             })
     } catch {

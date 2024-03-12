@@ -52,9 +52,15 @@ MagicMirror.get('/switchEv', (req,_res) => {        // switch to a different eve
     current_user.current_event = difEv;
 });
 MagicMirror.get('/listEv', (_req,res) => {          // return current user's events
-    for (even in current_user.events) {
-        res.send(even.objectify());
+    if (current_user.events) {
+        res.send(current_user.events);
+    } else {
+        res.send('failure!!')
     }
+    
+    //for (even in current_user.events) {
+    //    res.send(even.objectify());
+    //}
 });
 
 // Login fetch
@@ -136,7 +142,7 @@ class Event {
 
 
 // Find the port and serve up the web server
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
