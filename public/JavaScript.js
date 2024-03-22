@@ -5,12 +5,14 @@ async function logged_in_data() {
     
     // Runs the WebSocket-imitating function
     web_sock()
-    console.log('log')
+    console.log('log')          // Lets me know onload func is working                          
+
     // Displays Event tab and Logout btn
     const loged = await fetch('/self/uz');      // Fetch current user
     gedin = await loged.json();
     console.log("current_user == ",gedin)
     if (gedin != false) {
+
         // Display logout btn and events tab
         try {
             if (document.querySelector("#logout_btn")) {
