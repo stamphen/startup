@@ -1,22 +1,23 @@
 // Make sure express is working
-const express = require("express");
-const cors = require("cors")
+const express = require('express');
+const cookieparser = require('cookie-parser');
+const bcrypt = require('bcrypt');
+const DB = require('./database.js');
 const app = express();
-app.use(cors());
-
-
-// Bring up the web static files
 app.use(express.json());
+
+// Set up cookies, static files, and Router
+app.use(cookieParser());
 app.use(express.static('public'));
 
-
-// Set up a router so I can make web server requests to my own code
 var MagicMirror = express.Router();
 app.use(`/self`, MagicMirror);
 
 
+
 // Comments/Pictures fetch
 MagicMirror.get('/comments', (_req,res) => {        // return list of comments
+    // Auth current user, then retrieve db data about comments //
     res.send(current_user.current_event.comments);
 });
 MagicMirror.post('/comment', (req,res) => {         // post new comment
@@ -97,6 +98,8 @@ MagicMirror.put('/logout', (_req,res) => {           // logout
     res.send(false);
 });
 MagicMirror.get('/uz', (_req,res) => {              // get current user
+    // Change to use local storage
+    
     console.log(current_user);
     if (current_user != undefined) {
         res.send(current_user);
@@ -105,9 +108,14 @@ MagicMirror.get('/uz', (_req,res) => {              // get current user
         res.send(false)
     }
 });
-MagicMirror.get('/all_uz', (_req,res) => {          // get all users
-    res.send(users);
-})
+
+
+
+// Create Secure Router
+var secureMirror = express.Router();
+MagicMirror.use(secureMirror)
+
+
 
 
 // Variables in which to store data

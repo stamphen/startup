@@ -1,7 +1,6 @@
 // Adding onload event listeners to check if a user is logged in, and display data
-window.addEventListener("DOMContentLoaded",logged_in_data());
 
-async function logged_in_data() {
+(async function logged_in_data() {
     
     // Runs the WebSocket-imitating function
     web_sock()
@@ -79,7 +78,7 @@ async function logged_in_data() {
             } catch {}
         }
     }, 50);
-}
+})();
 
 
 // Function called to change main/pics subheader
