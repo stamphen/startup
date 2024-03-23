@@ -1,123 +1,19 @@
-// Adding onload event listeners to check if a user is logged in, and display data
-
-(async function logged_in_data() {
-    
-    // Runs the WebSocket-imitating function
-    //web_sock()
-    console.log('log')          // Lets me know onload func is working                          
-
-    // Displays Event tab and Logout btn
-    const loged = await fetch('/narcissism/uz');      // Fetch current user
-    gedin = await loged.json();
-    console.log("current_user == ",gedin)
-    if (gedin != false) {
-
-        // Display logout btn and events tab
-        try {
-            if (document.querySelector("#logout_btn")) {
-                document.getElementById("hidden_nav1").removeAttribute("hidden");
-                document.querySelector("#logout_btn").removeAttribute("hidden");
-            } else {
-                throw new Error("problem!");
-            }
-        } catch {
-        setTimeout(() => {
-            if (document.querySelector("#logout_btn")) {
-                document.getElementById("hidden_nav1").removeAttribute("hidden");
-                document.querySelector("#logout_btn").removeAttribute("hidden");
-            }
-        }, 50);
-        }
-    } else {
-        
-        // Move back to login if ever logged out
-        console.log("Not logged in!");
-        if (document.querySelector('#login_btn')) {
-        } else {
-            window.location.href = "index.html";
-        }
-
-        // Hide logout btn and events tab
-        try {
-            if (document.querySelector("#logout_btn")) {
-                document.getElementById("hidden_nav1").setAttribute("hidden",true);
-                document.querySelector("#logout_btn").setAttribute("hidden",true);
-            }
-        } catch {
-            setTimeout(() => {
-                if (document.querySelector("#logout_btn")) {
-                    document.getElementById("hidden_nav1").setAttribute("hidden",true);
-                    document.querySelector("#logout_btn").setAttribute("hidden",true);
-                }
-            }, 50);
-        }
-    }
-
-    // If not on login page, display current user
-    setTimeout(() => {
-        if (document.querySelector("#login_btn")) {
-        } else {
-            try {
-                if (gedin) {
-                    const user = gedin['username']
-                    const nem = document.createTextNode(`${user}`);
-                    try {
-                        if (document.querySelector("#user_name")=null) {
-                            throw new Error("nullloo");
-                        } else {
-                            const user_name = document.querySelector("#user_name");
-                            user_name.appendChild(nem);
-                        }
-                    } catch {
-                        setTimeout(() => {
-                            const user_name = document.querySelector("#user_name");
-                            user_name.appendChild(nem);
-                        }, 50);
-                    }
-                }
-            } catch {}
-        }
-    }, 50);
-})();
 
 
-// Function called to change main/pics subheader
-function ev_pc() {
-    const event_pic = document.querySelector("#main_pic");
-    if (event_pic.dataset.changed) {
-        return;
-    }
-    event_pic.dataset.changed = true;
-    
-    //const event = localStorage.getItem("current_event");
-    //const event_data = JSON.parse(localStorage.getItem(JSON.stringify(event)));
-    //console.log(event_data)
-    
-    //const tru = event_data.pic
-    //console.log(tru,typeof(tru))
-    //const yu = new File([event_data.pic],"filename")
-    //console.log(yu)
-    //new_ur = URL.createObjectURL(yu);
-    //console.log(new_ur)
-    new_url = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.H4SF9uJKJbNRYqnN37t9UAHaE8%26pid%3DApi&f=1&ipt=f1f906cb2c17b3dcdbe62a0ff646a467c6f46c7db0c24b4b7312fbe793a1fbbc&ipo=images"
-    console.log(new_url,typeof(new_url))
-    event_pic.src = new_url;
-}
-function main_header() {
-    
-}
-function event_list() {
-    console.log('kinda work')
+async function event_list() {
     try {
-        console.log('in')
-        fetch('/narcissism/listEv')
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('inside')
-                console.log("events: ",data)
-            })
+        cur_uz = localStorage.getItem("user");
+        const response = await fetch('/narcissism/listEv', {
+            method:'GET', 
+            headers: {'content-type': 'application/json; charset=UTF-8'},
+            body: JSON.stringify({user: ucur_uz})
+        }); 
+        const data = await response.json();
+        
+    
+        console.log("event_list is: ",data);    
     } catch {
-        console.log('event_list fetch failed')
+        console.log('not logd')
     }
 }
 
@@ -328,7 +224,6 @@ async function add_person() {
             })
 }
 async function new_event() {
-    
     // Find input elems
     const event_name = document.getElementById("event_name").value;
     const event_pic = document.getElementById("event_pic").value;
@@ -347,57 +242,12 @@ async function new_event() {
         body: event_data
     });
 
-    console.log("New Event Created:",JSON.stringify(event_name));    
+    localStorage.setItem("event", event_name);
+    console.log("New Event Created:",JSON.stringify(event_name)); 
+    window.location.href = 'main.html';
 }
 
 
-// Add a JavaScript function that imitates future WebSocket content
-async function web_sock() {
-    setInterval(async () => {
-        if (document.querySelector("#new_comment")) {
-            await fetch('https://randomuser.me/api/')
-                .then((response) => response.json())
-                .then((data) => {
-                    let nemm = data.results[0].name;
-                    numm = nemm.title + " " + nemm.first + " " + nemm.last;
-                });
-            await fetch('https://official-joke-api.appspot.com/random_joke')
-                .then((response) => response.json())
-                .then((data) => {
-                    total = data.setup + " " + data.punchline;
-                });
-            const prev_inp = document.querySelector('#new_comment').value;
-            const usr = document.querySelector('#user_name').textContent;
-            document.querySelector('#new_comment').value = total;
-            document.querySelector('#user_name').textContent = numm;
-            comment();
-            document.querySelector('#new_comment').value = prev_inp;
-            document.querySelector('#user_name').textContent = usr;
-        } else if (document.querySelector("#picture")) {
-            await fetch('https://randomuser.me/api/')
-                .then((response) => response.json())
-                .then((data) => {
-                    let nemm = data.results[0].name;
-                    numm = nemm.title + " " + nemm.first + " " + nemm.last;
-                });
-            await fetch('https://dog.ceo/api/breeds/image/random')
-                .then((response) => response.json())
-                .then((data) => {
-                    source = data.message
-                });
-            try {
-                prev_fil = document.querySelector('#picture').files[0];
-            } catch {}
-            const usr = document.querySelector('#user_name').textContent;
-            document.querySelector('#user_name').textContent = numm;
-            submit_pic(source);
-            try {
-                document.querySelector('#picture').files[0] = prev_fil;
-            } catch {}
-            document.querySelector('#user_name').textContent = usr;
-        }
-    }, 7500);
-}
 
 
 

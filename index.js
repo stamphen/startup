@@ -41,36 +41,19 @@ MagicMirror.delete('/dl', (_req,_res) => {          // delete saved lists of com
 });
 
 // Events fetch
-MagicMirror.get('/currEv', (_req,res) => {          // return current event
-    res.send(current_user.current_event);
+MagicMirror.post('/newEv', async (req,res) => {           // post new event
+    const newEv = {name:req.body['name'],url:req.body['url'],d1:req.body['d1'],d2:req.body['d2'],members:req.body['members']};
+    await createev(j, newEv);
+    res.send({name:req.body['name']});
 });
-MagicMirror.post('/newEv', (req,res) => {           // post new event
-    const newEv = new Event(req.body['name'],req.body['url'],req.body['d1'],req.body['d2'],req.body['members']);
-    newEv.addEv();
-    res.send(current_user.current_event);
+MagicMirror.get('/listEv', async (req,res) => {          // return current user's events
+    const ev_lst = await listev(req.body['user']);
+    res.send({ev_lst});
 });
-MagicMirror.delete('/delEv', (_req,_res) => {       // delete current event
-    current_user.current_event.delEv();
-});
-MagicMirror.get('/switchEv', (req,_res) => {        // switch to a different event
-    difEv = req.body;
-    current_user.current_event = difEv;
-});
-MagicMirror.get('/listEv', (_req,res) => {          // return current user's events
-                //try {
-                //    const evs = current_user.events;
-                //    res.send({"success!":"yes!"});
-                //    //res.send(evs);
-                //} catch {
-                //    const fal = "failure"
-                //    res.send({"failure":"yes"})
-                //}
-    if (current_user != undefined) {    
-        res.send({"success":"success"})
-    } else {
-        res.send({"failure":"failure"});
-    }
-});
+MagicMirror.get('/findEv', async (req,res) => {
+    const ret = await dB.findev(req.body['evname']);
+    res.send(ret);
+})
 
 // Login fetch
 MagicMirror.post('/account_new', async (req,res) => {    // create new account
@@ -87,23 +70,11 @@ MagicMirror.get('/login', async (req,res) => {            // login to existing a
     if (logged_user) {
         if (await bcrypt.compare(req.body.password, logged_user.password)) {
             setAuthCookie(res, logged_user.token);
-            res.send({id: logged_user._id });
+            res.send({id: logged_user._id});
             return;
         }
     } else {
         res.status(401).send({msg: 'Unauthorized'});
-    }
-});
-
-MagicMirror.get('/uz', (_req,res) => {              // get current user
-    // Change to use local storage
-    
-    console.log(current_user);
-    if (current_user != undefined) {
-        res.send(current_user);
-        //res.send(JSON.stringify(current_user.objectify()));
-    } else {
-        res.send(false)
     }
 });
 
@@ -124,6 +95,28 @@ secureMirror.use(async (req,res,next) => {
 
 
 
+
+
+// Simon code for handling errors, page redirection, and setting cookies
+
+// Default error handler
+app.use(function (err, req, res, next) {
+    res.status(500).send({ type: err.name, message: err.message });
+});
+
+  // Return the application's default page if the path is unknown
+app.use((_req, res) => {
+    res.sendFile('index.html', {root: 'public'});
+});
+
+  // setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+    res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+    });
+}
 
 
 // Find the port and serve up the web server
