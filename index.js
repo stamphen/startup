@@ -2,23 +2,27 @@
 const express = require('express');
 const cookieparser = require('cookie-parser');
 const bcrypt = require('bcrypt');
-const DB = require('./database.js');
+const dB = require('./database.js');
 const app = express();
 app.use(express.json());
 
 // Set up cookies, static files, and Router
-app.use(cookieParser());
+app.use(cookieparser());
 app.use(express.static('public'));
 
 var MagicMirror = express.Router();
-app.use(`/self`, MagicMirror);
+app.use(`/narcissism`, MagicMirror);
 
-
+const authCookieName = 'token';
 
 // Comments/Pictures fetch
-MagicMirror.get('/comments', (_req,res) => {        // return list of comments
+MagicMirror.get('/comments', async (req,res) => {        // return list of comments
     // Auth current user, then retrieve db data about comments //
-    res.send(current_user.current_event.comments);
+    const cur_uz = req.body.username;
+    const cur_ev = req.body.event_name;
+    const uz = await dB.finduz({username: cur_uz});
+    const commentz = uz[`${cur_ev}`].comments;
+    res.send(commentz);
 });
 MagicMirror.post('/comment', (req,res) => {         // post new comment
     current_user.current_event.comments.push(req.body);
@@ -69,34 +73,28 @@ MagicMirror.get('/listEv', (_req,res) => {          // return current user's eve
 });
 
 // Login fetch
-MagicMirror.post('/account_new', (req,res) => {    // create new account
-    const perp = new User(req.body['username'], req.body['password']);
-    if (perp in users) {
-        res.send(false);
+MagicMirror.post('/account_new', async (req,res) => {    // create new account
+    const already = await dB.finduz(req.body.username);
+    if (already) {
+        res.status(409).send({msg: 'User Already Exists'});
     } else {
-        perp.addUz();
-        res.send(true);
+        const newuz = await dB.createuz(req.body['username'],req.body['password']);
+        res.send({id:newuz._id});
     }
 });
-MagicMirror.post('/login', (req,res) => {            // login to existing account
-    const try_user = new User(req.body[0],req.body[1]);
-    same = false;
-    for (user in users) {
-        if (JSON.stringify(user.name) = JSON.stringify(try_user.name)) {
-            same = true;
+MagicMirror.get('/login', async (req,res) => {            // login to existing account
+    const logged_user = await dB.finduz(req.body.username);
+    if (logged_user) {
+        if (await bcrypt.compare(req.body.password, logged_user.password)) {
+            setAuthCookie(res, logged_user.token);
+            res.send({id: logged_user._id });
+            return;
         }
-    }
-    if (same = true) {
-        current_user = try_user;
-        res.send(true);
     } else {
-        res.send(false);
+        res.status(401).send({msg: 'Unauthorized'});
     }
 });
-MagicMirror.put('/logout', (_req,res) => {           // logout
-    current_user = null;
-    res.send(false);
-});
+
 MagicMirror.get('/uz', (_req,res) => {              // get current user
     // Change to use local storage
     
@@ -110,53 +108,22 @@ MagicMirror.get('/uz', (_req,res) => {              // get current user
 });
 
 
-
-// Create Secure Router
+// Create Secure Router (sends error if cookie isn't a valid auth token)
 var secureMirror = express.Router();
 MagicMirror.use(secureMirror)
+secureMirror.use(async (req,res,next) => {
+    authtoken = req.cookies[authCookieName];
+    const user = await dB.finduztoken(authtoken);
+    if (user) {
+        next();
+    } else {
+        res.status(401).send({msg: 'Unauthorized'});
+    }
+});
 
 
 
 
-// Variables in which to store data
-let users = [];
-let current_user = undefined;
-
-
-// Classes
-class User {
-    constructor(username, password) {
-        this.username = username;
-        this.password = password;
-        this.events = [];
-    }
-    addUz() {
-        current_user = this;
-        users.push(this);
-    }
-    objectify() {
-        return {username:this.username,password:this.password,events:this.events}
-    }
-}
-class Event {
-    constructor(name, url, date1, date2, members) {
-        this.name = name;
-        this.url = url;
-        this.date1 = date1;
-        this.date2 = date2;
-        this.members = members;
-        this.comments = [];
-        this.pictures = [];
-    }
-    addEv() {
-        current_user.events.push(this);
-        current_user.current_event = this;
-        return
-    }
-    objectify() {
-        return {name:this.name,url:this.url,d1:this.date1,d2:this.date2,members:this.members,comments:this.comments,pictures:this.pictures}
-    }
-}
 
 
 // Find the port and serve up the web server

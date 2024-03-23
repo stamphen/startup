@@ -3,11 +3,11 @@
 (async function logged_in_data() {
     
     // Runs the WebSocket-imitating function
-    web_sock()
+    //web_sock()
     console.log('log')          // Lets me know onload func is working                          
 
     // Displays Event tab and Logout btn
-    const loged = await fetch('/self/uz');      // Fetch current user
+    const loged = await fetch('/narcissism/uz');      // Fetch current user
     gedin = await loged.json();
     console.log("current_user == ",gedin)
     if (gedin != false) {
@@ -110,7 +110,7 @@ function event_list() {
     console.log('kinda work')
     try {
         console.log('in')
-        fetch('/self/listEv')
+        fetch('/narcissism/listEv')
             .then((response) => response.json())
             .then((data) => {
                 console.log('inside')
@@ -126,7 +126,7 @@ function clear() {
     localStorage.clear()
 }
 function del() {
-    fetch('/self/dl', {
+    fetch('/narcissism/dl', {
         method: 'DELETE'
     })
 }
@@ -172,7 +172,7 @@ function comment(comm=12,aut=14,rep="ut") {
     // do not submit post requests
     if (rep!="repeated") {
         // POST comment object with fetch
-        fetch('/self/comment', {
+        fetch('/narcissism/comment', {
             method:'POST', 
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(new_comm)
@@ -182,7 +182,7 @@ function comment(comm=12,aut=14,rep="ut") {
     }   
 }
 function main_comments() {
-    fetch('/self/comments')
+    fetch('/narcissism/comments')
         .then((response) => response.json())
         .then((data) => {
             for (let i=0; i<data.length; i++) {
@@ -230,7 +230,7 @@ function submit_pic(file=12345,aut=15,rep="ut") {
     // If called by main_photography(), don't POST
     if (rep!="repeated") {
         // POST picture object with fetch
-        fetch('/self/photograph', {
+        fetch('/narcissism/photograph', {
             method:'POST', 
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(new_picc) 
@@ -244,7 +244,7 @@ function submit_pic(file=12345,aut=15,rep="ut") {
     pic_img.src = urlpic;
 }
 function main_photography() {
-    fetch('/self/pictures')
+    fetch('/narcissism/pictures')
         .then((response) => response.json())
         .then((data) => {
             for (let i=0; i<data.length; i++) {
@@ -255,68 +255,46 @@ function main_photography() {
 
 
 // Login functions
-function login() {
-
-    // Get elems
-    const btn = document.getElementById("login_btn");
-    if (btn.hasAttribute("formaction")) {
-        btn.removeAttribute("formaction");
-    }
+async function login() {
+    // fetch DB call
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
-
-    // fetch get request 
-    try_user = {username: username, password: pswrd};
-    fetch('/self/login', {
-        method:'POST', 
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify(try_user)
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data == true) {
-                console.log("Login Success!");
-                window.location.href = "events.html";
-            } else {
-                console.log("Incorrect Credentials!");
-                alert("Incorrect Credentials!");
-            }
-        });
+    const response = await fetch('/narcissism/login', {
+        method:'GET', 
+        headers: {'content-type': 'application/json; charset=UTF-8'},
+        body: JSON.stringify({username: username, password: pswrd})
+    });
+    if (response.ok) {
+        localStorage.setItem("user",`${username}`);
+        console.log("Login Success!");
+        window.location.href = "events.html";
+    } else {
+        const js = await response.json();
+        console.error(js);
+        alert("Incorrect Credentials!");
+    }        
 }
-function create_account() {
-
-    // get elems
-    const btn = document.getElementById("create_btn");
-    if (btn.hasAttribute("formaction")) {  
-        btn.removeAttribute("formaction");
-    }
+async function create_account() {
+    // db fetch request
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
-
-    // get fetch
-    try_user = {username: username, password: pswrd};
-    console.log(JSON.stringify(try_user))
-    fetch('/self/account_new', {
+    const response = await fetch('/narcissism/account_new', {
         method:'POST', 
         headers: {'content-type': 'application/json'},
-        body: JSON.stringify(try_user)
+        body: JSON.stringify({username: username, password: pswrd})
     })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            if (data != false) {
-                console.log("Thanks for creating an account, ",username);
-                window.location.href = "events.html";
-            } else {
-                console.log("Account already exists!");
-                alert("Account already exists!");
-            }
-        });
+    if (response.ok) {
+        localStorage.setItem("user",`${username}`);
+        console.log("Login Success!");
+        window.location.href = "events.html";
+    } else {
+        const js = await response.json();
+        console.error(js);
+        alert("Account Already Exists");
+    }        
 }
 async function logout() {
-    await fetch('/self/logout', {
-        method: 'PUT'
-    })
+    localStorage.removeItem("user");
 }
 
 
@@ -327,7 +305,7 @@ async function add_person() {
     let varia = false;
 
     // Fetch list of users
-    await fetch('/self/all_uz')
+    await fetch('/narcissism/all_uz')
         .then((response) => response.json())
         .then((data) => {
             found = false;
@@ -364,7 +342,7 @@ async function new_event() {
     const event_data = {name:event_name, url:event_pic, d1:event_date_1, d2:event_date_2, members:add_members}
     
     // Send a post request to create a new event
-    await fetch('/self/newEv', {
+    await fetch('/narcissism/newEv', {
         method: 'POST',
         body: event_data
     });

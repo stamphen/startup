@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.1"
+    "express": "^4.19.1",
+    "mongodb": "^6.5.0"
   },
   "name": "startup",
   "description": "[Link to notes.md](notes.md)",
