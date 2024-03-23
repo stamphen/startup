@@ -175,6 +175,7 @@ async function create_account() {
     // db fetch request
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
+    console.log('half')
     const response = await fetch('/narcissism/account_new', {
         method:'POST', 
         headers: {'content-type': 'application/json'},

@@ -58,10 +58,9 @@ MagicMirror.get('/findEv', async (req,res) => {
 // Login fetch
 MagicMirror.post('/account_new', async (req,res) => {    // create new account
     console.log('creating account')
+    console.log('username is: ', req.body.username)
     try {
-        const already = await dB.finduz(req.body.username);
-        console.log("body = ",req.body.username)
-        console.log("already")
+        const already = dB.finduz(req.body.username);
         console.log(already)
         res.status(409).send({msg: 'User Already Exists'});
     } catch {
