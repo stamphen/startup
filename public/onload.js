@@ -1,4 +1,4 @@
-(async function logged_in_data() {
+async function logged_in_data() {
     console.log('log')          // Lets me know onload func is working                          
 
     // Displays Event tab and Logout btn
@@ -46,19 +46,13 @@
         }
     }
 
-    
-    // Display logout btn and events tab
-    
-
-        
-        
     // If not on login page, display current user
     setTimeout(() => {
         if (document.querySelector("#login_btn")) {
         } else {
             try {
-                if (gedin) {
-                    const user = gedin['username']
+                if (localStorage.getItem("user")) {
+                    const user = localStorage.getItem("user");
                     const nem = document.createTextNode(`${user}`);
                     try {
                         if (document.querySelector("#user_name")=null) {
@@ -77,4 +71,6 @@
             } catch {}
         }
     }, 50);
-})();
+}
+
+logged_in_data();

@@ -156,7 +156,7 @@ async function login() {
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
     const response = await fetch('/narcissism/login', {
-        method:'GET', 
+        method:'POST', 
         headers: {'content-type': 'application/json; charset=UTF-8'},
         body: JSON.stringify({username: username, password: pswrd})
     });
@@ -171,6 +171,7 @@ async function login() {
     }        
 }
 async function create_account() {
+    console.log('try')
     // db fetch request
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
@@ -179,6 +180,7 @@ async function create_account() {
         headers: {'content-type': 'application/json'},
         body: JSON.stringify({username: username, password: pswrd})
     })
+    console.log('fetching')
     if (response.ok) {
         localStorage.setItem("user",`${username}`);
         console.log("Login Success!");

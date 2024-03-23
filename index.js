@@ -48,7 +48,7 @@ MagicMirror.post('/newEv', async (req,res) => {           // post new event
 });
 MagicMirror.get('/listEv', async (req,res) => {          // return current user's events
     const ev_lst = await listev(req.body['user']);
-    res.send({ev_lst});
+    res.send(ev_lst);
 });
 MagicMirror.get('/findEv', async (req,res) => {
     const ret = await dB.findev(req.body['evname']);
@@ -57,15 +57,20 @@ MagicMirror.get('/findEv', async (req,res) => {
 
 // Login fetch
 MagicMirror.post('/account_new', async (req,res) => {    // create new account
-    const already = await dB.finduz(req.body.username);
-    if (already) {
+    console.log('creating account')
+    try {
+        const already = await dB.finduz(req.body.username);
+        console.log("body = ",req.body.username)
+        console.log("already")
+        console.log(already)
         res.status(409).send({msg: 'User Already Exists'});
-    } else {
+    } catch {
         const newuz = await dB.createuz(req.body['username'],req.body['password']);
+        console.log('new')
         res.send({id:newuz._id});
     }
 });
-MagicMirror.get('/login', async (req,res) => {            // login to existing account
+MagicMirror.post('/login', async (req,res) => {            // login to existing account
     const logged_user = await dB.finduz(req.body.username);
     if (logged_user) {
         if (await bcrypt.compare(req.body.password, logged_user.password)) {
@@ -112,9 +117,9 @@ app.use((_req, res) => {
   // setAuthCookie in the HTTP response
 function setAuthCookie(res, authToken) {
     res.cookie(authCookieName, authToken, {
-    secure: true,
-    httpOnly: true,
-    sameSite: 'strict',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
     });
 }
 
