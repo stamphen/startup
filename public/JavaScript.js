@@ -242,6 +242,26 @@ async function new_event() {
     window.location.href = 'main.html';
 }
 
+// WebSocket for comments
+async function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    new_socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    new_socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        if (msg.type === GameEndEvent) {
+            comment('player', msg.from, `scored ${msg.value.score}`);
+        }
+    }   
+}
+configureWebSocket();
+
+function sendWebSockComment(user, text) {
+    const comment = {
+        user: user,
+        text: text
+    };
+    new_socket.send(JSON.stringify(comment));
+}
 
 
 ////////////////////////////////

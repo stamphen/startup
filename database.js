@@ -51,7 +51,7 @@ function finduztoken(token) {
 
 function createev(username, event) {
     eventscollection.insertOne({name:event.name, pic:event.url, d1:event.d1, d2:event.d2, member:event.members, comments:{}, pictures:{}});
-    userscollection.findOne({username: username}).events.insertOne(event.name);
+    userscollection.findOne({username: username}).events.insert(event.name);
     return;
 }
 
