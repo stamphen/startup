@@ -1,10 +1,9 @@
-// Make sure express is working
-const { WebSocketServer } = require('ws');
+// Initialize express and other modules
 const express = require('express');
 const cookieparser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const dB = require('./database.js');
-const { websock } = require('./websocket.js');
+const websock = require('./websocket.js');
 const app = express();
 app.use(express.json());
 
@@ -39,7 +38,16 @@ MagicMirror.post('/login', async (req,res) => {            // login to existing 
             res.send({id: logged_user._id});
             return;
         }
+    }
     res.status(401).send({msg: 'Unauthorized'});
+});
+MagicMirror.post('/finduze', async (req,res) => {
+    const uze = await dB.finduz(req.body.username);
+    if (uze != null) {
+        res.send({id: uze._id})
+        return;
+    } else {
+        res.status(401).send({msg: 'No User Found'})
     }
 });
 
@@ -63,7 +71,7 @@ secureMirror.get('/comments', async (req,res) => {        // return list of comm
     const cur_uz = req.body.username;
     const cur_ev = req.body.event_name;
     const uz = await dB.finduz({username: cur_uz});
-    const commentz = uz[`${cur_ev}`].comments;
+    const commentz = uz.events[`${cur_ev}`].comments;
     res.send(commentz);
 });
 secureMirror.post('/comment', (req,res) => {         // post new comment
@@ -77,15 +85,12 @@ secureMirror.post('/photograph', (req,res) => {      // post new picture
     current_user.current_event.pictures.push(req.body);
     res.send(current_user.current_event.pictures);
 });
-secureMirror.delete('/dl', (_req,_res) => {          // delete saved lists of comm/pics
-    current_user.current_event.comments = [];
-    current_user.current_event.pictures = [];
-});
 
 // Events fetch
 secureMirror.post('/newEv', async (req,res) => {           // post new event
+    const user = req.body['username']
     const newEv = {name:req.body['name'],url:req.body['url'],d1:req.body['d1'],d2:req.body['d2'],members:req.body['members']};
-    await createev(j, newEv);
+    await dB.createev(user, newEv);
     res.send({name:req.body['name']});
 });
 secureMirror.post('/listEv', async (req,res) => {          // return current user's events
@@ -121,8 +126,10 @@ function setAuthCookie(res, authToken) {
 }
 
 
-// Find the port and serve up the web server
+// Find the port and serve up the web server, then initiate WebSocket
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
-app.listen(port, () => {
+const myServer = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+websock.initializeWS(myServer);

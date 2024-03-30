@@ -200,30 +200,24 @@ async function logout() {
 async function add_person() { 
     const new_perp = document.getElementById("members").value;
     const perp_list = document.getElementById("people_list");
-    let varia = false;
 
     // Fetch list of users
-    await fetch('/narcissism/all_uz')
-        .then((response) => response.json())
-        .then((data) => {
-            found = false;
-            for (let i=0;i<data.length;i++) {
-                if (data[i]['username'] == new_perp) {
-                    found = true;
-                }
-            }
-            if (found == true) {
-                console.log("Person Successfully Added!");
-                const new_person = document.createElement("li");
-                const person_text = document.createTextNode(new_perp);
-                new_person.appendChild(person_text);
-                perp_list.appendChild(new_person);
-                document.querySelector('#members').value = ""
-            } else {
-                console.log("No person with this username!");
-                alert('No person with this username!');
-            }
-            })
+    const response = await fetch('/narcissism/finduze', {
+        method:'POST', 
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify({username: new_perp})
+    });
+    if (response.ok) {
+        console.log("Person Successfully Added!");
+        const new_person = document.createElement("li");
+        const person_text = document.createTextNode(new_perp);
+        new_person.appendChild(person_text);
+        perp_list.appendChild(new_person);
+        document.querySelector('#members').value = ""
+    } else {
+        console.log("No person with this username!");
+        alert('No person with this username!');
+    }
 }
 async function new_event() {
     // Find input elems
@@ -236,20 +230,17 @@ async function new_event() {
     for (chil of new_peeps.children) {
         add_members.push(chil.innerText);
     }
-    const event_data = {name:event_name, url:event_pic, d1:event_date_1, d2:event_date_2, members:add_members}
-    
+    const event_data = {username:localStorage.getItem("user"), name:event_name, url:event_pic, d1:event_date_1, d2:event_date_2, members:add_members}
     // Send a post request to create a new event
     await fetch('/narcissism/newEv', {
         method: 'POST',
-        body: event_data
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(event_data)
     });
-
     localStorage.setItem("event", event_name);
     console.log("New Event Created:",JSON.stringify(event_name)); 
     window.location.href = 'main.html';
 }
-
-
 
 
 

@@ -20,14 +20,11 @@ async function run() {
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } catch {
-        console.log("Attempted to ping your deployment. Ping failed.")
+        console.log("Attempted to ping your deployment. Connection unsuccessful.")
+        process.exit(1);
     }
-        //finally {
-        // Ensures that the client will close when you finish/error
-        //await client.close();
-        //}
 }
-run().catch(console.dir);
+run();
 
 
 // Functions that reference mongodb
@@ -53,8 +50,8 @@ function finduztoken(token) {
 }
 
 function createev(username, event) {
+    eventscollection.insertOne({name:event.name, pic:event.url, d1:event.d1, d2:event.d2, member:event.members, comments:{}, pictures:{}});
     userscollection.findOne({username: username}).events.insertOne(event.name);
-    eventscollection.insertOne(event);
     return;
 }
 
