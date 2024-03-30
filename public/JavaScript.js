@@ -1,5 +1,4 @@
-
-
+// Function to list the events the current user is a member of
 async function event_list() {
     try {
         cur_uz = localStorage.getItem("user");

@@ -1,8 +1,10 @@
 // Make sure express is working
+const { WebSocketServer } = require('ws');
 const express = require('express');
 const cookieparser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const dB = require('./database.js');
+const { websock } = require('./websocket.js');
 const app = express();
 app.use(express.json());
 
