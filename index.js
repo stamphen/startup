@@ -16,46 +16,6 @@ app.use(`/narcissism`, MagicMirror);
 
 const authCookieName = 'token';
 
-// Comments/Pictures fetch
-MagicMirror.get('/comments', async (req,res) => {        // return list of comments
-    // Auth current user, then retrieve db data about comments //
-    const cur_uz = req.body.username;
-    const cur_ev = req.body.event_name;
-    const uz = await dB.finduz({username: cur_uz});
-    const commentz = uz[`${cur_ev}`].comments;
-    res.send(commentz);
-});
-MagicMirror.post('/comment', (req,res) => {         // post new comment
-    current_user.current_event.comments.push(req.body);
-    res.send(current_user.current_event.comments);
-});
-MagicMirror.get('/pictures', (_req,res) => {        // return list of pictures
-    res.send(current_user.current_event.pictures);
-});
-MagicMirror.post('/photograph', (req,res) => {      // post new picture
-    current_user.current_event.pictures.push(req.body);
-    res.send(current_user.current_event.pictures);
-});
-MagicMirror.delete('/dl', (_req,_res) => {          // delete saved lists of comm/pics
-    current_user.current_event.comments = [];
-    current_user.current_event.pictures = [];
-});
-
-// Events fetch
-MagicMirror.post('/newEv', async (req,res) => {           // post new event
-    const newEv = {name:req.body['name'],url:req.body['url'],d1:req.body['d1'],d2:req.body['d2'],members:req.body['members']};
-    await createev(j, newEv);
-    res.send({name:req.body['name']});
-});
-MagicMirror.post('/listEv', async (req,res) => {          // return current user's events
-    const ev_lst = await dB.listev(req.body['user']);
-    console.log(ev_lst)
-    res.send(ev_lst);
-});
-MagicMirror.get('/findEv', async (req,res) => {
-    const ret = await dB.findev(req.body['evname']);
-    res.send(ret);
-})
 
 // Login fetch
 MagicMirror.post('/account_new', async (req,res) => {    // create new account
@@ -67,6 +27,7 @@ MagicMirror.post('/account_new', async (req,res) => {    // create new account
         res.status(409).send({msg: 'User Already Exists'});
     } catch {
         const newuz = await dB.createuz(req.body['username'],req.body['password']);
+        setAuthCookie(res, new_uz.token);
         res.send({id:newuz._id});
     }
 });
@@ -96,9 +57,46 @@ secureMirror.use(async (req,res,next) => {
     }
 });
 
+// Comments/Pictures fetch
+secureMirror.get('/comments', async (req,res) => {        // return list of comments
+    // Auth current user, then retrieve db data about comments //
+    const cur_uz = req.body.username;
+    const cur_ev = req.body.event_name;
+    const uz = await dB.finduz({username: cur_uz});
+    const commentz = uz[`${cur_ev}`].comments;
+    res.send(commentz);
+});
+secureMirror.post('/comment', (req,res) => {         // post new comment
+    current_user.current_event.comments.push(req.body);
+    res.send(current_user.current_event.comments);
+});
+secureMirror.get('/pictures', (_req,res) => {        // return list of pictures
+    res.send(current_user.current_event.pictures);
+});
+secureMirror.post('/photograph', (req,res) => {      // post new picture
+    current_user.current_event.pictures.push(req.body);
+    res.send(current_user.current_event.pictures);
+});
+secureMirror.delete('/dl', (_req,_res) => {          // delete saved lists of comm/pics
+    current_user.current_event.comments = [];
+    current_user.current_event.pictures = [];
+});
 
-
-
+// Events fetch
+secureMirror.post('/newEv', async (req,res) => {           // post new event
+    const newEv = {name:req.body['name'],url:req.body['url'],d1:req.body['d1'],d2:req.body['d2'],members:req.body['members']};
+    await createev(j, newEv);
+    res.send({name:req.body['name']});
+});
+secureMirror.post('/listEv', async (req,res) => {          // return current user's events
+    const ev_lst = await dB.listev(req.body['user']);
+    console.log(ev_lst)
+    res.send(ev_lst);
+});
+secureMirror.get('/findEv', async (req,res) => {
+    const ret = await dB.findev(req.body['evname']);
+    res.send(ret);
+})
 
 
 // Simon code for handling errors, page redirection, and setting cookies
