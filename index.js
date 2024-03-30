@@ -45,8 +45,9 @@ MagicMirror.post('/newEv', async (req,res) => {           // post new event
     await createev(j, newEv);
     res.send({name:req.body['name']});
 });
-MagicMirror.get('/listEv', async (req,res) => {          // return current user's events
-    const ev_lst = await listev(req.body['user']);
+MagicMirror.post('/listEv', async (req,res) => {          // return current user's events
+    const ev_lst = await dB.listev(req.body['user']);
+    console.log(ev_lst)
     res.send(ev_lst);
 });
 MagicMirror.get('/findEv', async (req,res) => {
@@ -56,33 +57,26 @@ MagicMirror.get('/findEv', async (req,res) => {
 
 // Login fetch
 MagicMirror.post('/account_new', async (req,res) => {    // create new account
-    console.log('creating account')
-    console.log('username is: ', req.body.username)
     try {
-        const already = dB.finduz(req.body.username);
-        if (typeof(already) == null) {
-            console.log("true")
-        } else {
-            console.log("false")
+        const already = await dB.finduz(req.body.username);
+        if (already == null) {
+            throw new Error();
         }
-        console.log(already)
         res.status(409).send({msg: 'User Already Exists'});
     } catch {
         const newuz = await dB.createuz(req.body['username'],req.body['password']);
-        console.log('new')
         res.send({id:newuz._id});
     }
 });
 MagicMirror.post('/login', async (req,res) => {            // login to existing account
     const logged_user = await dB.finduz(req.body.username);
-    if (logged_user) {
+    if (logged_user != null) {
         if (await bcrypt.compare(req.body.password, logged_user.password)) {
             setAuthCookie(res, logged_user.token);
             res.send({id: logged_user._id});
             return;
         }
-    } else {
-        res.status(401).send({msg: 'Unauthorized'});
+    res.status(401).send({msg: 'Unauthorized'});
     }
 });
 

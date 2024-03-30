@@ -3,11 +3,14 @@
 async function event_list() {
     try {
         cur_uz = localStorage.getItem("user");
+        console.log("local storage ok")
         const response = await fetch('/narcissism/listEv', {
-            method:'GET', 
+            method:'POST', 
             headers: {'content-type': 'application/json; charset=UTF-8'},
-            body: JSON.stringify({user: ucur_uz})
+            body: JSON.stringify({user: cur_uz})
         }); 
+        console.log("fetch ok")
+        console.log(response)
         const data = await response.json();
         
     
@@ -174,13 +177,11 @@ async function create_account() {
     // db fetch request
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
-    console.log('new account fetch.....')
     const response = await fetch('/narcissism/account_new', {
         method:'POST', 
         headers: {'content-type': 'application/json'},
         body: JSON.stringify({username: username, password: pswrd})
-    })
-    console.log('fetch complete!')
+    });
     if (response.ok) {
         localStorage.setItem("user",`${username}`);
         console.log("Login Success!");
