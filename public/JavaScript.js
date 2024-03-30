@@ -53,6 +53,9 @@ function comment(comm=12,aut=14,rep="ut") {
         com_val = neww_commment.value;
         aut_val = user_name.innerText;
     }
+    
+    sendWebSockComment(aut_val, com_val);
+
 
     const comment_input = document.createTextNode(com_val);
     parag.appendChild(comment_input);
@@ -253,7 +256,6 @@ async function configureWebSocket() {
         }
     }   
 }
-configureWebSocket();
 
 function sendWebSockComment(user, text) {
     const comment = {
