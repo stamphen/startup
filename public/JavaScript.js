@@ -196,6 +196,7 @@ async function create_account() {
 }
 async function logout() {
     localStorage.removeItem("user");
+    window.location.reload();
 }
 
 

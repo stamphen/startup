@@ -70,3 +70,10 @@ I finished applying CSS styles to my HTML web application. I think the website l
 - **Mongo Data: Credentials/Events** - I have two mongodb collections: users and events. The credentials of all users will be stored (with the passwords hashed), and all event data will also be stored. Under each users credentials it will list the names of the events they are privy to.
 - **Restricts functionality** - My application successfully prevents a user from accessing any page other than the login screen unless they are logged in. My code will redirect the user back to the login screen if they happen to be on another screen. The status of whether someone is logged in or not I am storing in localStorage. Only the username will be stored there, and I will run fetch calls to the DB to retrieve more data about the user. 
 - **Improving old features** - I also created two new JavaScript files and moved the `<script>` calls to different places in the html. This solved some problems I was having with JavaScript functions being called before the DOM was loaded. 
+
+## WebSocket Deliverable:
+- I implemented WebSocket in my web application. However, it did not really do anything, so I think I will need to spend more time studying web socket so I can understand it and apply it better in my web application. 
+- **Completed Login/DB work** - There was a bit of login and database work I did not complete for the last deliverable. I completed that here, including successfully opening a connection with the database and fixing login problems my previous deployment had.
+- **Frontend WebSocket** - When a user makes a comment, my code sends a web socket comment. 
+- **Backend WebSocket Listening** - My code listens for websocket comments. 
+- **Display WebSocket data** - I have not yet been able to implement this, but will do so soon. 
