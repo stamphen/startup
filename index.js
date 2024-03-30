@@ -9,7 +9,6 @@ app.use(express.json());
 // Set up cookies, static files, and Router
 app.use(cookieparser());
 app.use(express.static('public'));
-
 var MagicMirror = express.Router();
 app.use(`/narcissism`, MagicMirror);
 
@@ -61,6 +60,11 @@ MagicMirror.post('/account_new', async (req,res) => {    // create new account
     console.log('username is: ', req.body.username)
     try {
         const already = dB.finduz(req.body.username);
+        if (typeof(already) == null) {
+            console.log("true")
+        } else {
+            console.log("false")
+        }
         console.log(already)
         res.status(409).send({msg: 'User Already Exists'});
     } catch {

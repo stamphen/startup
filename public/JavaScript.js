@@ -171,17 +171,16 @@ async function login() {
     }        
 }
 async function create_account() {
-    console.log('try')
     // db fetch request
     const username = document.getElementById("username").value;
     const pswrd = document.getElementById("password").value;
-    console.log('half')
+    console.log('new account fetch.....')
     const response = await fetch('/narcissism/account_new', {
         method:'POST', 
         headers: {'content-type': 'application/json'},
         body: JSON.stringify({username: username, password: pswrd})
     })
-    console.log('fetching')
+    console.log('fetch complete!')
     if (response.ok) {
         localStorage.setItem("user",`${username}`);
         console.log("Login Success!");

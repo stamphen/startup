@@ -3,7 +3,7 @@ async function logged_in_data() {
 
     // Displays Event tab and Logout btn
     if (localStorage.getItem("user")) {
-        console.log("stuf");
+        console.log("Logged in!");
         try {
             if (document.querySelector("#logout_btn")) {
                 document.getElementById("hidden_nav1").removeAttribute("hidden");
@@ -20,14 +20,10 @@ async function logged_in_data() {
         }, 50);
         }
     } else {
-        console.log("nope");
         // Move back to login if ever logged out
         console.log("Not logged in!");
-        if (document.querySelector('#login_btn')) {
-            console.log('already')
-        } else {
+        if (!document.querySelector('#login_btn')) {
             window.location.href = "index.html";
-            console.log("now")
         }
 
         // Hide logout btn and events tab
@@ -48,8 +44,7 @@ async function logged_in_data() {
 
     // If not on login page, display current user
     setTimeout(() => {
-        if (document.querySelector("#login_btn")) {
-        } else {
+        if (!document.querySelector("#login_btn")) {
             try {
                 if (localStorage.getItem("user")) {
                     const user = localStorage.getItem("user");
